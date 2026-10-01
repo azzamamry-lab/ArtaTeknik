@@ -182,8 +182,8 @@ nav a.aktif{font-weight:700}
 .dua-kolom ul{list-style:none;display:grid;gap:13px}
 .dua-kolom li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;
   color:var(--text);line-height:1.6}
-.dua-kolom li::before{content:"¹3";color:var(--green);font-weight:800;
-  flex-shrink:0;font-size:17px;line-height:1.5}
+.dua-kolom li::before{content:"";width:20px;height:20px;flex-shrink:0;
+  margin-top:3px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5 9.5 18 20 6'/%3E%3C/svg%3E") no-repeat center/contain}
 .dua-kolom a{color:var(--blue);text-decoration:none;font-weight:600}
 .dua-kolom a:hover{text-decoration:underline}
 
@@ -192,14 +192,17 @@ nav a.aktif{font-weight:700}
 .faq-item{background:#fff;border:1px solid var(--sky-border);border-radius:14px;
   margin-bottom:12px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
 .faq-item[open]{border-color:var(--blue);box-shadow:var(--shadow)}
-.faq-item summary{cursor:pointer;padding:19px 24px;font-weight:700;font-size:16px;
+.faq-item summary{cursor:pointer;padding:20px 24px;font-weight:700;font-size:16px;
   color:var(--navy);list-style:none;display:flex;justify-content:space-between;
-  gap:14px;align-items:center}
+  gap:18px;align-items:center;line-height:1.5;transition:color .2s}
+.faq-item summary:hover{color:var(--blue)}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:"+";color:var(--blue);font-size:25px;
-  font-weight:400;line-height:1;flex-shrink:0}
-.faq-item[open] summary::after{content:"2"}
-.faq-item p{padding:0 24px 22px;color:var(--muted);font-size:15.5px;line-height:1.72}
+.faq-item summary::after{content:"";width:22px;height:22px;flex-shrink:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c5fb0' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") no-repeat center/contain;
+  transition:transform .25s ease}
+.faq-item[open] summary::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c5fb0' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E")}
+.faq-item p{padding:18px 24px 24px;color:var(--muted);font-size:15.5px;line-height:1.75;
+  border-top:1px solid var(--sky-border)}
 
 /* --- Kotak info --- */
 .kotak-info{background:var(--sky);border-left:4px solid var(--blue);
