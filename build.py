@@ -176,6 +176,29 @@ nav a.aktif{font-weight:700}
 .keunggulan-item h3{font-size:17px;color:var(--navy);margin-bottom:8px;font-weight:700}
 .keunggulan-item p{color:var(--muted);font-size:14.5px;line-height:1.65}
 
+/* --- Blok rating Google --- */
+.kotak-rating{display:grid;grid-template-columns:240px 1fr;gap:40px;
+  align-items:center;background:#fff;border:1px solid var(--garis);
+  border-radius:16px;padding:34px 40px}
+.rating-kiri{text-align:center;border-right:1px solid var(--garis);padding-right:40px}
+.rating-angka{font-size:64px;font-weight:800;color:var(--navy);line-height:1}
+.rating-bintang{color:#f4b400;font-size:26px;letter-spacing:4px;margin:8px 0 4px}
+.rating-label{font-size:13px;color:var(--muted);font-weight:600}
+.rating-judul{font-size:26px;color:var(--navy);margin-bottom:12px;font-weight:800}
+.rating-teks{color:var(--muted);font-size:15.5px;line-height:1.75;margin-bottom:22px}
+.btn-review{display:inline-flex;align-items:center;gap:9px;
+  background:var(--navy);color:#fff!important;text-decoration:none;
+  padding:13px 22px;border-radius:10px;font-weight:700;font-size:14.5px;
+  transition:transform .18s ease, box-shadow .18s ease}
+.btn-review:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(11,42,78,.25)}
+.btn-review svg{color:#f4b400;flex:none}
+@media (max-width:760px){
+  .kotak-rating{grid-template-columns:1fr;gap:24px;padding:30px 24px}
+  .rating-kiri{border-right:0;border-bottom:1px solid var(--garis);padding:0 0 24px}
+  .rating-angka{font-size:52px}
+  .rating-judul{font-size:21px}
+}
+
 /* --- Dua kolom (daftar) --- */
 .dua-kolom{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;max-width:920px;
   margin:0 auto}
@@ -468,6 +491,15 @@ def schema_bisnis():
   "areaServed": [
 {', '.join([f'    {{"@type": "City", "name": "{esc(a["nama_lengkap"])}"}}' for a in DATA["area"]])}
   ],
+  "aggregateRating": {{
+    "@type": "AggregateRating",
+    "ratingValue": "{B['rating']}",
+    "bestRating": "5",
+    "worstRating": "1"
+  }},
+  "sameAs": [
+    "{B['google_maps']}"
+  ],
   "openingHoursSpecification": {{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -511,6 +543,15 @@ def schema_layanan(l):
   "provider": {{"@id": "{DOMAIN}/#bisnis"}},
   "areaServed": [
 {', '.join([f'    {{"@type": "City", "name": "{esc(a["nama_lengkap"])}"}}' for a in DATA["area"]])}
+  ],
+  "aggregateRating": {{
+    "@type": "AggregateRating",
+    "ratingValue": "{B['rating']}",
+    "bestRating": "5",
+    "worstRating": "1"
+  }},
+  "sameAs": [
+    "{B['google_maps']}"
   ],
   "description": "{esc(l['deskripsi_seo'])}",
   "url": "{DOMAIN}/layanan/{l['slug']}.html"
@@ -664,9 +705,34 @@ def blok_kartu_area():
 # ============================================================
 # HALAMAN: BERANDA
 # ============================================================
+def blok_rating():
+    """Blok rating Google + tombol lihat ulasan."""
+    return f"""
+<section class="section">
+  <div class="container">
+    <div class="kotak-rating">
+      <div class="rating-kiri">
+        <div class="rating-angka">{B['rating']}</div>
+        <div class="rating-bintang" aria-label="Rating {B['rating']} dari 5">★★★★★</div>
+        <div class="rating-label">Rating Google</div>
+      </div>
+      <div class="rating-kanan">
+        <h2 class="rating-judul">Dipercaya pelanggan di Solo Raya</h2>
+        <p class="rating-teks">Pelanggan menilai layanan ARTA TEKNIK {B['rating']} dari 5 di Google. Penilaian ini datang dari pelanggan yang sudah memakai jasa servis dan pemasangan AC maupun CCTV kami.</p>
+        <a class="btn-review" href="{B['google_maps']}" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+          Lihat semua ulasan di Google
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+
 def buat_beranda():
-    judul = f"{B['nama']} — Spesialis AC & CCTV | Solo, Sukoharjo, Karanganyar"
-    desk = f"{B['nama']}, spesialis pemasangan, servis, dan perawatan AC & CCTV di Solo, Sukoharjo, Karanganyar. Teknisi berpengalaman, bergaransi, harga bersahabat."
+    judul = f"{B['nama']} — Service AC & CCTV Solo Raya | Solo, Sukoharjo, Karanganyar"
+    desk = f"{B['nama']}, spesialis servis dan pemasangan AC & CCTV di Solo Raya (Solo, Sukoharjo, Karanganyar). Rating {B['rating']} di Google. Teknisi datang ke lokasi, bergaransi."
 
     isi = f"""<section class="hero">
   <div class="hero-grid-lines"></div>
@@ -688,7 +754,7 @@ def buat_beranda():
         </a>
       </div>
       <div class="mini-icons">
-        <span><b>Respon cepat</b> Bisa hari ini</span>
+        <span><b>Rating {B['rating']}</b> di Google</span>
         <span><b>Garansi</b> Setiap pekerjaan</span>
       </div>
     </div>
@@ -714,6 +780,8 @@ def buat_beranda():
 </section>
 
 {blok_kartu_layanan()}
+
+{blok_rating()}
 
 {blok_keunggulan()}
 
@@ -792,7 +860,7 @@ def buat_layanan(l):
 {blok_cta(f"Butuh {l['nama'].lower()} hari ini?")}"""
 
     jejak = [("Beranda", ""), (l['nama'], f"layanan/{l['slug']}.html")]
-    schema = schema_layanan(l) + "\n" + schema_breadcrumb(jejak) + "\n" + schema_faq(l['faq'])
+    schema = schema_bisnis() + "\n" + schema_layanan(l) + "\n" + schema_breadcrumb(jejak) + "\n" + schema_faq(l['faq'])
 
     return halaman(l['judul_seo'], l['deskripsi_seo'], isi, aktif=l['nama'],
                    kedalaman=1, canonical=f"layanan/{l['slug']}.html",
@@ -867,6 +935,8 @@ def buat_area(a):
   </div>
 </section>
 
+{blok_rating()}
+
 {blok_keunggulan()}
 
 {blok_faq(faq_area, f"Pertanyaan Seputar Layanan di {a['nama']}")}
@@ -874,7 +944,7 @@ def buat_area(a):
 {blok_cta(f"Butuh teknisi di {a['nama']} hari ini?", f"Hubungi {B['nama']}. Kami siap datang ke lokasi Anda di {a['nama']} dan sekitarnya.")}"""
 
     jejak = [("Beranda", ""), (a['nama'], f"area/{a['slug']}.html")]
-    schema = schema_breadcrumb(jejak) + "\n" + schema_faq(faq_area)
+    schema = schema_bisnis() + "\n" + schema_breadcrumb(jejak) + "\n" + schema_faq(faq_area)
 
     return halaman(judul, desk, isi, aktif="Area", kedalaman=1,
                    canonical=f"area/{a['slug']}.html", schema_extra=schema)

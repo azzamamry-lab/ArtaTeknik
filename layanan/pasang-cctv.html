@@ -532,6 +532,29 @@ nav a.aktif{font-weight:700}
 .keunggulan-item h3{font-size:17px;color:var(--navy);margin-bottom:8px;font-weight:700}
 .keunggulan-item p{color:var(--muted);font-size:14.5px;line-height:1.65}
 
+/* --- Blok rating Google --- */
+.kotak-rating{display:grid;grid-template-columns:240px 1fr;gap:40px;
+  align-items:center;background:#fff;border:1px solid var(--garis);
+  border-radius:16px;padding:34px 40px}
+.rating-kiri{text-align:center;border-right:1px solid var(--garis);padding-right:40px}
+.rating-angka{font-size:64px;font-weight:800;color:var(--navy);line-height:1}
+.rating-bintang{color:#f4b400;font-size:26px;letter-spacing:4px;margin:8px 0 4px}
+.rating-label{font-size:13px;color:var(--muted);font-weight:600}
+.rating-judul{font-size:26px;color:var(--navy);margin-bottom:12px;font-weight:800}
+.rating-teks{color:var(--muted);font-size:15.5px;line-height:1.75;margin-bottom:22px}
+.btn-review{display:inline-flex;align-items:center;gap:9px;
+  background:var(--navy);color:#fff!important;text-decoration:none;
+  padding:13px 22px;border-radius:10px;font-weight:700;font-size:14.5px;
+  transition:transform .18s ease, box-shadow .18s ease}
+.btn-review:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(11,42,78,.25)}
+.btn-review svg{color:#f4b400;flex:none}
+@media (max-width:760px){
+  .kotak-rating{grid-template-columns:1fr;gap:24px;padding:30px 24px}
+  .rating-kiri{border-right:0;border-bottom:1px solid var(--garis);padding:0 0 24px}
+  .rating-angka{font-size:52px}
+  .rating-judul{font-size:21px}
+}
+
 /* --- Dua kolom (daftar) --- */
 .dua-kolom{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;max-width:920px;
   margin:0 auto}
@@ -629,6 +652,47 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
 }
 
 </style>
+{
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "@id": "https://artatehnik.com/#bisnis",
+  "name": "ARTA TEKNIK",
+  "description": "Spesialis pemasangan, servis, dan perawatan AC &amp; CCTV di Solo, Sukoharjo, Karanganyar.",
+  "url": "https://artatehnik.com/",
+  "telephone": "+6282147975947",
+  "priceRange": "Rp",
+  "image": "https://artatehnik.com/og-cover.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Jawa Tengah",
+    "addressCountry": "ID"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Surakarta"},     {"@type": "City", "name": "Kabupaten Sukoharjo"},     {"@type": "City", "name": "Kabupaten Karanganyar"}
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://maps.app.goo.gl/H1vjxh3a2qoH4yKi8"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "08:00",
+    "closes": "20:00"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Layanan ARTA TEKNIK",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Servis AC", "url": "https://artatehnik.com/layanan/servis-ac.html"}},       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pasang AC", "url": "https://artatehnik.com/layanan/pasang-ac.html"}},       {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pasang CCTV", "url": "https://artatehnik.com/layanan/pasang-cctv.html"}}
+    ]
+  }
+}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -637,6 +701,15 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
   "provider": {"@id": "https://artatehnik.com/#bisnis"},
   "areaServed": [
     {"@type": "City", "name": "Surakarta"},     {"@type": "City", "name": "Kabupaten Sukoharjo"},     {"@type": "City", "name": "Kabupaten Karanganyar"}
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://maps.app.goo.gl/H1vjxh3a2qoH4yKi8"
   ],
   "description": "Jasa pemasangan CCTV untuk rumah, toko, kantor, dan pabrik di Solo Raya. Setting sampai bisa dilihat dari HP. Bergaransi.",
   "url": "https://artatehnik.com/layanan/pasang-cctv.html"
@@ -697,7 +770,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
       </svg>
       <span>
         <span class="nm-brand">ARTA TEKNIK</span>
-        <span class="sub-brand">Spesialis AC &amp; CCTV</span>
+        <span class="sub-brand">Service AC &amp; CCTV Solo Raya</span>
       </span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navUtama" aria-label="Buka menu">&#9776;</button>
@@ -890,7 +963,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
     </div>
     <div class="foot-bottom">
       <span>&copy; 2026 ARTA TEKNIK. Seluruh hak cipta dilindungi.</span>
-      <span>Spesialis AC &amp; CCTV &middot; Solo Raya</span>
+      <span>Service AC &amp; CCTV Solo Raya &middot; Solo Raya</span>
     </div>
   </div>
 </footer>

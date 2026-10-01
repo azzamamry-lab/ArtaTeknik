@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARTA TEKNIK — Spesialis AC &amp; CCTV | Solo, Sukoharjo, Karanganyar</title>
-<meta name="description" content="ARTA TEKNIK, spesialis pemasangan, servis, dan perawatan AC &amp; CCTV di Solo, Sukoharjo, Karanganyar. Teknisi berpengalaman, bergaransi, harga bersahabat.">
+<title>ARTA TEKNIK — Service AC &amp; CCTV Solo Raya | Solo, Sukoharjo, Karanganyar</title>
+<meta name="description" content="ARTA TEKNIK, spesialis servis dan pemasangan AC &amp; CCTV di Solo Raya (Solo, Sukoharjo, Karanganyar). Rating 4.7 di Google. Teknisi datang ke lokasi, bergaransi.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://artatehnik.com/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ARTA TEKNIK">
-<meta property="og:title" content="ARTA TEKNIK — Spesialis AC &amp; CCTV | Solo, Sukoharjo, Karanganyar">
-<meta property="og:description" content="ARTA TEKNIK, spesialis pemasangan, servis, dan perawatan AC &amp; CCTV di Solo, Sukoharjo, Karanganyar. Teknisi berpengalaman, bergaransi, harga bersahabat.">
+<meta property="og:title" content="ARTA TEKNIK — Service AC &amp; CCTV Solo Raya | Solo, Sukoharjo, Karanganyar">
+<meta property="og:description" content="ARTA TEKNIK, spesialis servis dan pemasangan AC &amp; CCTV di Solo Raya (Solo, Sukoharjo, Karanganyar). Rating 4.7 di Google. Teknisi datang ke lokasi, bergaransi.">
 <meta property="og:url" content="https://artatehnik.com/">
 <meta property="og:image" content="https://artatehnik.com/og-cover.png">
 <meta property="og:locale" content="id_ID">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ARTA TEKNIK — Spesialis AC &amp; CCTV | Solo, Sukoharjo, Karanganyar">
-<meta name="twitter:description" content="ARTA TEKNIK, spesialis pemasangan, servis, dan perawatan AC &amp; CCTV di Solo, Sukoharjo, Karanganyar. Teknisi berpengalaman, bergaransi, harga bersahabat.">
+<meta name="twitter:title" content="ARTA TEKNIK — Service AC &amp; CCTV Solo Raya | Solo, Sukoharjo, Karanganyar">
+<meta name="twitter:description" content="ARTA TEKNIK, spesialis servis dan pemasangan AC &amp; CCTV di Solo Raya (Solo, Sukoharjo, Karanganyar). Rating 4.7 di Google. Teknisi datang ke lokasi, bergaransi.">
 <meta name="twitter:image" content="https://artatehnik.com/og-cover.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -532,6 +532,29 @@ nav a.aktif{font-weight:700}
 .keunggulan-item h3{font-size:17px;color:var(--navy);margin-bottom:8px;font-weight:700}
 .keunggulan-item p{color:var(--muted);font-size:14.5px;line-height:1.65}
 
+/* --- Blok rating Google --- */
+.kotak-rating{display:grid;grid-template-columns:240px 1fr;gap:40px;
+  align-items:center;background:#fff;border:1px solid var(--garis);
+  border-radius:16px;padding:34px 40px}
+.rating-kiri{text-align:center;border-right:1px solid var(--garis);padding-right:40px}
+.rating-angka{font-size:64px;font-weight:800;color:var(--navy);line-height:1}
+.rating-bintang{color:#f4b400;font-size:26px;letter-spacing:4px;margin:8px 0 4px}
+.rating-label{font-size:13px;color:var(--muted);font-weight:600}
+.rating-judul{font-size:26px;color:var(--navy);margin-bottom:12px;font-weight:800}
+.rating-teks{color:var(--muted);font-size:15.5px;line-height:1.75;margin-bottom:22px}
+.btn-review{display:inline-flex;align-items:center;gap:9px;
+  background:var(--navy);color:#fff!important;text-decoration:none;
+  padding:13px 22px;border-radius:10px;font-weight:700;font-size:14.5px;
+  transition:transform .18s ease, box-shadow .18s ease}
+.btn-review:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(11,42,78,.25)}
+.btn-review svg{color:#f4b400;flex:none}
+@media (max-width:760px){
+  .kotak-rating{grid-template-columns:1fr;gap:24px;padding:30px 24px}
+  .rating-kiri{border-right:0;border-bottom:1px solid var(--garis);padding:0 0 24px}
+  .rating-angka{font-size:52px}
+  .rating-judul{font-size:21px}
+}
+
 /* --- Dua kolom (daftar) --- */
 .dua-kolom{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;max-width:920px;
   margin:0 auto}
@@ -648,6 +671,15 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
   "areaServed": [
     {"@type": "City", "name": "Surakarta"},     {"@type": "City", "name": "Kabupaten Sukoharjo"},     {"@type": "City", "name": "Kabupaten Karanganyar"}
   ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://maps.app.goo.gl/H1vjxh3a2qoH4yKi8"
+  ],
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -708,7 +740,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
       </svg>
       <span>
         <span class="nm-brand">ARTA TEKNIK</span>
-        <span class="sub-brand">Spesialis AC &amp; CCTV</span>
+        <span class="sub-brand">Service AC &amp; CCTV Solo Raya</span>
       </span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navUtama" aria-label="Buka menu">&#9776;</button>
@@ -743,7 +775,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
         </a>
       </div>
       <div class="mini-icons">
-        <span><b>Respon cepat</b> Bisa hari ini</span>
+        <span><b>Rating 4.7</b> di Google</span>
         <span><b>Garansi</b> Setiap pekerjaan</span>
       </div>
     </div>
@@ -812,6 +844,28 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
     </div>
   </div>
 </section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="kotak-rating">
+      <div class="rating-kiri">
+        <div class="rating-angka">4.7</div>
+        <div class="rating-bintang" aria-label="Rating 4.7 dari 5">★★★★★</div>
+        <div class="rating-label">Rating Google</div>
+      </div>
+      <div class="rating-kanan">
+        <h2 class="rating-judul">Dipercaya pelanggan di Solo Raya</h2>
+        <p class="rating-teks">Pelanggan menilai layanan ARTA TEKNIK 4.7 dari 5 di Google. Penilaian ini datang dari pelanggan yang sudah memakai jasa servis dan pemasangan AC maupun CCTV kami.</p>
+        <a class="btn-review" href="https://maps.app.goo.gl/H1vjxh3a2qoH4yKi8" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+          Lihat semua ulasan di Google
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="section" id="keunggulan">
   <div class="container">
@@ -977,7 +1031,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
     </div>
     <div class="foot-bottom">
       <span>&copy; 2026 ARTA TEKNIK. Seluruh hak cipta dilindungi.</span>
-      <span>Spesialis AC &amp; CCTV &middot; Solo Raya</span>
+      <span>Service AC &amp; CCTV Solo Raya &middot; Solo Raya</span>
     </div>
   </div>
 </footer>

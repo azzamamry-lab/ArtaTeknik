@@ -4,8 +4,11 @@
 # mengisi semua halaman (home, layanan, area, kontak).
 
 bisnis:
+  # Nama resmi — HARUS SAMA PERSIS di: website, Google Business Profile,
+  # Facebook, Instagram, direktori. Ini kunci GEO (AI baca konsistensi).
   nama: "ARTA TEKNIK"
-  tagline: "Spesialis AC & CCTV"
+  nama_resmi: "ARTA TEKNIK — Service AC & CCTV Solo Raya"
+  tagline: "Service AC & CCTV Solo Raya"
   deskripsi: "Spesialis pemasangan, servis, dan perawatan AC & CCTV"
   telepon_display: "0821-4797-5947"
   telepon_wa: "6282147975947"
@@ -15,10 +18,19 @@ bisnis:
   garansi: "Garansi 30 hari"
   respons: "Respon cepat, bisa hari ini"
 
+  # Rating Google (dari Google Business Profile)
+  rating: 4.7
+  jumlah_ulasan: null          # isi kalau sudah tahu jumlah ulasan
+  google_maps: "https://maps.app.goo.gl/H1vjxh3a2qoH4yKi8"
+
+  # Area layanan — alamat fisik sengaja TIDAK ditampilkan (usaha di rumah).
+  # Dipakai untuk areaServed di schema + teks "melayani panggilan".
   alamat:
+    kota: "Karanganyar"
     region: "Jawa Tengah"
     negara: "ID"
-    catatan: "Melayani panggilan ke lokasi"
+    tampilkan_alamat: false      # true = tampilkan alamat lengkap
+    catatan: "Teknisi datang ke lokasi (layanan panggilan). Basis di Karanganyar, melayani seluruh Solo Raya."
 
 # Keunggulan (dipakai di banyak halaman)
 keunggulan:
