@@ -288,9 +288,9 @@ def header(aktif=""):
     item = ""
     for label, link in menu:
         cls = ' class="aktif"' if label == aktif else ""
-        item += f'<a href="{link}"{cls}>{esc(label)}</a>\n      '
+        item += f'<a href="{{{{REL}}}}{link}"{cls}>{esc(label)}</a>\n      '
     return f"""<header id="header">
-  <div class="wrap bar">
+  <div class="container bar">
     <a class="brand" href="{_rel('index.html')}">
       <svg viewBox="0 0 48 48" width="40" height="40" role="img" aria-label="Logo {esc(B['nama'])}">
         <rect x="4" y="4" width="40" height="40" rx="11" fill="#0b2a4e"/>
