@@ -651,6 +651,222 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
   .cta-akhir{padding:60px 0}
 }
 
+
+/* ============================================================
+   ARTA TEKNIK v3 — Premium pass
+   ============================================================ */
+:root{
+  --grad-hero:linear-gradient(155deg,#061a35 0%,#0b2a4e 42%,#123a63 78%,#17477a 100%);
+  --glass:rgba(255,255,255,.075);
+  --glass-b:rgba(255,255,255,.16);
+  --shadow-soft:0 18px 48px -18px rgba(11,42,78,.28);
+  --shadow-pop:0 30px 70px -22px rgba(11,42,78,.42);
+  --r-xl:26px;
+  --ease:cubic-bezier(.22,.75,.28,1);
+}
+body{background:#fbfdff}
+
+/* ---------- Header premium ---------- */
+header{background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid rgba(217,232,247,.9)}
+header.gulir{background:rgba(255,255,255,.94);
+  box-shadow:0 10px 34px -14px rgba(11,42,78,.22)}
+.brand svg{transition:transform .4s var(--ease)}
+.brand:hover svg{transform:rotate(-8deg) scale(1.06)}
+nav a{position:relative;padding:8px 2px}
+nav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:2px;
+  border-radius:2px;background:var(--grad-gold);transition:right .3s var(--ease)}
+nav a:hover::after,nav a.aktif::after{right:0}
+nav .btn::after{display:none}
+.btn-gold{position:relative;overflow:hidden;border-radius:12px}
+.btn-gold::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.55),transparent 75%);
+  transform:translateX(-130%);transition:transform .7s var(--ease)}
+.btn-gold:hover::before{transform:translateX(130%)}
+
+/* ---------- Hero premium ---------- */
+.hero{padding:96px 0 112px;background:var(--grad-hero)}
+.hero::before{background:
+  radial-gradient(circle at 82% 8%,rgba(46,134,222,.42),transparent 46%),
+  radial-gradient(circle at 8% 92%,rgba(244,180,0,.20),transparent 42%),
+  radial-gradient(circle at 55% 120%,rgba(46,134,222,.18),transparent 60%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:90px;
+  background:linear-gradient(to top,#fbfdff,transparent);pointer-events:none;z-index:3}
+.hero-grid-lines{background-size:52px 52px;opacity:.85;
+  animation:gridDrift 34s linear infinite}
+@keyframes gridDrift{to{background-position:52px 52px}}
+.hero h1{font-size:clamp(35px,5.4vw,58px);text-shadow:0 2px 30px rgba(0,0,0,.22)}
+.hero h1 em{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:var(--gold)}
+.hero-badge{animation:fadeUp .7s var(--ease) both}
+.hero h1{animation:fadeUp .7s .06s var(--ease) both}
+.hero p.lead{animation:fadeUp .7s .12s var(--ease) both}
+.hero-ctas{animation:fadeUp .7s .18s var(--ease) both}
+.mini-icons{animation:fadeUp .7s .24s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero-ctas .btn{position:relative}
+.btn-wa{background:linear-gradient(135deg,#2ee06f,#1eb955);color:#fff!important;
+  box-shadow:0 14px 32px -10px rgba(37,211,102,.6);border-radius:13px}
+.btn-wa:hover{box-shadow:0 20px 42px -12px rgba(37,211,102,.7)}
+.btn-ghost{background:var(--glass);border:1.5px solid var(--glass-b);border-radius:13px;
+  backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45)}
+
+/* Stats bar */
+.hero-stats-v3{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px;
+  animation:fadeUp .7s .3s var(--ease) both}
+.hsv{flex:1 1 130px;background:var(--glass);border:1px solid var(--glass-b);
+  border-radius:16px;padding:15px 18px;backdrop-filter:blur(10px);text-align:left;
+  transition:transform .3s var(--ease),background .3s,box-shadow .3s}
+.hsv:hover{transform:translateY(-5px);background:rgba(255,255,255,.13);
+  box-shadow:0 16px 34px -14px rgba(0,0,0,.4)}
+.hsv b{display:block;font-family:"Sora",sans-serif;font-size:24px;font-weight:800;
+  color:var(--gold);line-height:1}
+.hsv span{font-size:12px;color:rgba(255,255,255,.72);font-weight:600;
+  letter-spacing:.2px;display:block;margin-top:5px}
+
+/* Visual scene (panel kanan hero) */
+.scene-wrap{position:relative;animation:fadeUp .8s .15s var(--ease) both}
+.scene-card{background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.045));
+  border:1px solid var(--glass-b);border-radius:var(--r-xl);padding:16px;
+  backdrop-filter:blur(16px);box-shadow:var(--shadow-pop);position:relative;overflow:hidden}
+.scene-card::before{content:"";position:absolute;top:-60%;left:-30%;width:70%;height:220%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
+  transform:rotate(18deg);animation:sheen 7s ease-in-out infinite}
+@keyframes sheen{0%,70%{transform:translateX(-40%) rotate(18deg)}100%{transform:translateX(340%) rotate(18deg)}}
+.tabs-v3{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:rgba(0,0,0,.3);
+  border-radius:14px;padding:5px;margin-bottom:14px;position:relative;z-index:2}
+.tabs-v3 button{background:none;border:0;color:#bcd6f2;font:700 14.5px "Plus Jakarta Sans",sans-serif;
+  padding:11px;border-radius:10px;cursor:pointer;transition:all .28s var(--ease)}
+.tabs-v3 button[aria-selected="true"]{background:var(--grad-gold);color:var(--navy);
+  box-shadow:0 8px 20px -8px rgba(244,180,0,.75)}
+.scene{display:none}
+.scene.on{display:block;animation:fadeUp .45s var(--ease) both}
+.scene svg{width:100%;height:auto;border-radius:16px;display:block}
+.scene-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:14px 16px;margin-top:12px;background:rgba(0,0,0,.28);border-radius:14px;
+  font-size:13.5px;color:rgba(255,255,255,.85);position:relative;z-index:2}
+.scene-cap b{color:var(--gold);font-family:"Sora",sans-serif;font-size:15px}
+.scene-cap .live{display:inline-flex;align-items:center;gap:7px}
+.scene-cap .live i{width:7px;height:7px;border-radius:50%;background:#3ddc84;
+  animation:pulseDot 1.7s infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(61,220,132,.65)}70%{box-shadow:0 0 0 8px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+/* animasi dalam SVG */
+.wv{fill:none;stroke:#7fd4ff;stroke-width:3.4;stroke-linecap:round;opacity:.5;
+  animation:wv 2.6s ease-in-out infinite}
+.wv:nth-of-type(2){animation-delay:.35s}.wv:nth-of-type(3){animation-delay:.7s}
+@keyframes wv{0%,100%{transform:translateY(0);opacity:.22}50%{transform:translateY(15px);opacity:.75}}
+.flk{fill:#d8f1ff;animation:flk 4.2s linear infinite}
+.flk:nth-of-type(2){animation-delay:-1.1s;animation-duration:5.1s}
+.flk:nth-of-type(3){animation-delay:-2.2s}
+.flk:nth-of-type(4){animation-delay:-3.1s;animation-duration:4.6s}
+.flk:nth-of-type(5){animation-delay:-.6s;animation-duration:5.6s}
+.flk:nth-of-type(6){animation-delay:-2.7s}
+@keyframes flk{0%{transform:translateY(-8px);opacity:0}12%{opacity:1}100%{transform:translateY(155px);opacity:0}}
+.sweep{transform-origin:158px 92px;animation:sweep 4.4s ease-in-out infinite;fill:url(#bmGrad)}
+@keyframes sweep{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(17deg)}}
+.recDot{fill:#ff4d4d;animation:blink 1.25s steps(2,start) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- Trust marquee ---------- */
+.trust-bar{background:#fff;border-bottom:1px solid var(--sky-border);padding:18px 0;
+  overflow:hidden;position:relative}
+.trust-bar::before,.trust-bar::after{content:"";position:absolute;top:0;bottom:0;width:80px;
+  z-index:2;pointer-events:none}
+.trust-bar::before{left:0;background:linear-gradient(to right,#fff,transparent)}
+.trust-bar::after{right:0;background:linear-gradient(to left,#fff,transparent)}
+.trust-track{display:flex;gap:44px;white-space:nowrap;will-change:transform;
+  animation:marquee 34s linear infinite;width:max-content}
+.trust-track:hover{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.trust-track span{display:inline-flex;align-items:center;gap:9px;font-size:14px;
+  font-weight:600;color:var(--muted)}
+.trust-track b{color:var(--navy);font-weight:800}
+.trust-track svg{color:var(--gold);flex:none}
+
+/* ---------- Section polish ---------- */
+.section-title .kicker{display:inline-block;font-size:12px;font-weight:800;
+  letter-spacing:2.2px;text-transform:uppercase;color:var(--blue);
+  background:rgba(28,95,176,.09);padding:6px 14px;border-radius:100px;margin-bottom:16px}
+.section h2{letter-spacing:-.9px}
+.section-title{text-align:center;max-width:720px;margin:0 auto 48px}
+.section-title p{margin-top:2px}
+.section-title h2{margin-bottom:12px}
+.kartu-l,.area-kartu,.info-item,.faq-item{box-shadow:var(--shadow-soft)}
+.kartu-l{position:relative;overflow:hidden}
+.kartu-l::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;
+  background:var(--grad-gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease)}
+.kartu-l:hover::before{transform:scaleX(1)}
+.kartu-l .ikon{transition:transform .35s var(--ease),background .3s}
+.kartu-l:hover .ikon{transform:translateY(-3px) scale(1.06)}
+.kartu-l:hover h3{color:var(--blue)}
+.kartu-l h3{transition:color .3s}
+.area-kartu{position:relative;overflow:hidden}
+.area-kartu::after{content:"";position:absolute;right:-40px;bottom:-40px;width:130px;height:130px;
+  border-radius:50%;background:radial-gradient(circle,rgba(28,95,176,.10),transparent 70%);
+  transition:transform .5s var(--ease)}
+.area-kartu:hover::after{transform:scale(1.6)}
+.keunggulan-ikon{box-shadow:0 10px 26px -12px rgba(11,42,78,.35)}
+.faq-item[open]{transform:translateY(-2px)}
+.kotak-rating{border:1px solid var(--sky-border);position:relative;overflow:hidden;
+  background:linear-gradient(150deg,#fff,#f7fbff);box-shadow:var(--shadow-soft)}
+.kotak-rating::before{content:"";position:absolute;right:-70px;top:-70px;width:200px;height:200px;
+  border-radius:50%;background:radial-gradient(circle,rgba(244,180,0,.12),transparent 68%)}
+.rating-angka{background:var(--grad-navy);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+
+/* ---------- CTA akhir ---------- */
+.cta-akhir{background:var(--grad-hero);padding:88px 0}
+.cta-akhir::after{width:620px;height:620px}
+.cta-akhir h2{letter-spacing:-1px}
+.cta-tombol{animation:none}
+
+/* ---------- Footer ---------- */
+footer{background:linear-gradient(180deg,#0a1f3a,#061a30);position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;left:-120px;top:-140px;width:420px;height:420px;
+  border-radius:50%;background:radial-gradient(circle,rgba(28,95,176,.16),transparent 70%)}
+
+/* ---------- WhatsApp FAB ---------- */
+.fab{position:fixed;right:18px;bottom:18px;z-index:120;display:inline-flex;align-items:center;
+  gap:11px;background:linear-gradient(135deg,#2ee06f,#1eb955);color:#fff;font-weight:800;
+  font-size:14.5px;padding:0 22px 0 17px;height:58px;border-radius:100px;text-decoration:none;
+  box-shadow:0 16px 38px -12px rgba(37,211,102,.7);
+  transform:translateY(110px) scale(.85);opacity:0;
+  transition:transform .45s var(--ease),opacity .35s,box-shadow .3s}
+.fab.show{transform:none;opacity:1}
+.fab:hover{box-shadow:0 22px 48px -14px rgba(37,211,102,.85);transform:translateY(-3px)}
+.fab svg{width:27px;height:27px;flex:none}
+.fab::after{content:"";position:absolute;inset:0;border-radius:100px;
+  border:2px solid rgba(37,211,102,.5);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.22);opacity:0}}
+@media(max-width:520px){.fab span{display:none}.fab{width:58px;padding:0;justify-content:center}}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* ---------- Responsif v3 ---------- */
+@media(max-width:980px){
+  .hero{padding:72px 0 86px}
+  .hero-inner{gap:38px}
+  .scene-wrap{order:-1}
+}
+@media(max-width:640px){
+  .hero{padding:56px 0 68px}
+  .hero-stats-v3{gap:10px}
+  .hsv{flex:1 1 44%;padding:13px 15px}
+  .hsv b{font-size:21px}
+  .cta-akhir{padding:64px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .fab{transform:none;opacity:1}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -760,9 +976,9 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
   <div class="container hero-inner">
     <div>
       <span class="hero-badge">
-        <span class="dot"></span> Spesialis AC &amp; CCTV
+        <span class="dot"></span> Spesialis AC &amp; CCTV · Solo Raya
       </span>
-      <h1>AC Tidak Dingin?<br>Rumah Belum Aman?</h1>
+      <h1>AC Tidak Dingin?<br>Rumah Belum <em>Aman?</em></h1>
       <p class="lead">Kami servis AC dan pasang CCTV di Solo, Sukoharjo, dan Karanganyar. Teknisi datang ke lokasi, kerja rapi, bergaransi.</p>
       <div class="hero-ctas">
         <a class="btn btn-wa" href="https://wa.me/6282147975947?text=Assalamualaikum%20ARTA%20TEKNIK%2C%20saya%20butuh%20bantuan." target="_blank" rel="noopener">
@@ -774,31 +990,107 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <div class="mini-icons">
-        <span><b>Rating 4.7</b> di Google</span>
-        <span><b>Garansi</b> Setiap pekerjaan</span>
+      <div class="hero-stats-v3">
+        <div class="hsv"><b>4.7/5</b><span>Rating Google</span></div>
+        <div class="hsv"><b>30 Hari</b><span>Garansi pekerjaan</span></div>
+        <div class="hsv"><b>3 Kota</b><span>Solo · Sukoharjo · Karanganyar</span></div>
       </div>
     </div>
-    <div class="hero-poin">
-      <div class="hp">
-        <b>Aman &amp; Terpercaya</b>
-        <span>Sudah dipercaya pelanggan Solo Raya</span>
-      </div>
-      <div class="hp">
-        <b>Profesional</b>
-        <span>Teknisi berpengalaman dan teliti</span>
-      </div>
-      <div class="hp">
-        <b>Bergaransi</b>
-        <span>Setiap pekerjaan ada garansi</span>
-      </div>
-      <div class="hp">
-        <b>Harga Bersahabat</b>
-        <span>Transparan, tanpa biaya dadakan</span>
+
+    <div class="scene-wrap">
+      <div class="scene-card">
+        <div class="tabs-v3" role="tablist" aria-label="Pilih tampilan layanan">
+          <button role="tab" id="tAC" aria-selected="true" aria-controls="sAC" type="button">Servis AC</button>
+          <button role="tab" id="tCCTV" aria-selected="false" aria-controls="sCCTV" type="button">Pasang CCTV</button>
+        </div>
+
+        <div class="scene on" id="sAC" role="tabpanel" aria-labelledby="tAC">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Ilustrasi unit AC dingin">
+            <defs>
+              <linearGradient id="acBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f7fbff"/><stop offset="1" stop-color="#dbe9f9"/>
+              </linearGradient>
+            </defs>
+            <rect x="26" y="30" width="348" height="94" rx="22" fill="url(#acBody)"/>
+            <rect x="26" y="98" width="348" height="26" rx="13" fill="#c5d9f1"/>
+            <rect x="48" y="106" width="304" height="7" rx="3.5" fill="#8ea5cc"/>
+            <rect x="48" y="52" width="78" height="11" rx="5.5" fill="#0b2a4e"/>
+            <circle cx="340" cy="58" r="6.5" fill="#3ddc84"/>
+            <circle cx="340" cy="58" r="11" fill="none" stroke="#3ddc84" stroke-opacity=".35" stroke-width="2"/>
+            <path class="wv" d="M66 142 q20 15 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+            <path class="wv" d="M66 162 q20 15 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+            <path class="wv" d="M66 182 q20 15 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+            <g>
+              <circle class="flk" cx="88" cy="132" r="4"/>
+              <circle class="flk" cx="146" cy="138" r="3"/>
+              <circle class="flk" cx="206" cy="132" r="5"/>
+              <circle class="flk" cx="258" cy="140" r="3"/>
+              <circle class="flk" cx="312" cy="134" r="4"/>
+              <circle class="flk" cx="178" cy="140" r="3"/>
+            </g>
+          </svg>
+          <div class="scene-cap">
+            <span class="live"><i></i> Cuci AC + check up</span>
+            <b>Rp80.000</b>
+          </div>
+        </div>
+
+        <div class="scene" id="sCCTV" role="tabpanel" aria-labelledby="tCCTV">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Ilustrasi kamera CCTV memantau">
+            <defs>
+              <linearGradient id="bmGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#7fd4ff" stop-opacity=".55"/>
+                <stop offset="1" stop-color="#7fd4ff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <polygon class="sweep" points="152,92 400,4 400,214"/>
+            <rect x="58" y="68" width="112" height="44" rx="13" fill="#f4f8ff"/>
+            <rect x="150" y="75" width="36" height="31" rx="9" fill="#0b2a4e" stroke="#f4f8ff" stroke-width="3"/>
+            <circle cx="168" cy="90" r="7.5" fill="#7fd4ff"/>
+            <circle class="recDot" cx="76" cy="83" r="4"/>
+            <rect x="100" y="112" width="13" height="32" fill="#8ea5cc"/>
+            <rect x="38" y="142" width="134" height="11" rx="5.5" fill="#8ea5cc"/>
+            <rect x="248" y="126" width="126" height="128" rx="18" fill="#061940" stroke="#f4f8ff" stroke-width="4"/>
+            <g fill="#17477a">
+              <rect x="262" y="142" width="46" height="44" rx="5"/>
+              <rect x="316" y="142" width="46" height="44" rx="5"/>
+              <rect x="262" y="194" width="46" height="44" rx="5"/>
+              <rect x="316" y="194" width="46" height="44" rx="5"/>
+            </g>
+            <g fill="#2e86de" opacity=".55">
+              <rect x="262" y="142" width="46" height="10" rx="3"/>
+              <rect x="316" y="194" width="46" height="10" rx="3"/>
+            </g>
+            <circle class="recDot" cx="270" cy="151" r="3.4"/>
+          </svg>
+          <div class="scene-cap">
+            <span class="live"><i></i> Pantau dari HP, 24 jam</span>
+            <b>Setting DVR/NVR</b>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="trust-bar" aria-hidden="true">
+  <div class="trust-track">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.9-5 4.8 1.3 6.8L12 17.6 5.9 20.8 7.2 14l-5-4.8 6.9-.9z"/></svg><b>Rating</b> 4.7 di Google</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Garansi</b> setiap pekerjaan</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Layanan</b> panggilan ke lokasi</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Area</b> Solo, Sukoharjo, Karanganyar</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Bayar</b> setelah cek hasil</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Teknisi</b> berpengalaman &amp; rapi</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Jadwal</b> Senin - Sabtu, 08.00 - 20.00 WIB</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.9-5 4.8 1.3 6.8L12 17.6 5.9 20.8 7.2 14l-5-4.8 6.9-.9z"/></svg><b>Rating</b> 4.7 di Google</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Garansi</b> setiap pekerjaan</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Layanan</b> panggilan ke lokasi</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Area</b> Solo, Sukoharjo, Karanganyar</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Bayar</b> setelah cek hasil</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Teknisi</b> berpengalaman &amp; rapi</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg><b>Jadwal</b> Senin - Sabtu, 08.00 - 20.00 WIB</span>
+  </div>
+</div>
 
 <section class="section" id="layanan">
   <div class="container">
@@ -808,7 +1100,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
       <p>Dari servis rutin sampai pemasangan baru. Semua dikerjakan teknisi berpengalaman.</p>
     </div>
     <div class="kartu-layanan">
-      <article class="kartu-l">
+      <article class="kartu-l reveal ">
         <div class="ikon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1c5fb0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H4z"/><path d="M7 10h4M7 13h2"/><circle cx="17" cy="11" r="1.6"/></svg>
         </div>
@@ -819,7 +1111,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </article>
-      <article class="kartu-l">
+      <article class="kartu-l reveal d1">
         <div class="ikon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1c5fb0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H4z"/><path d="M7 10h4M7 13h2"/><circle cx="17" cy="11" r="1.6"/></svg>
         </div>
@@ -830,7 +1122,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </article>
-      <article class="kartu-l">
+      <article class="kartu-l reveal d2">
         <div class="ikon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1c5fb0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H4z"/><path d="M7 10h4M7 13h2"/><circle cx="17" cy="11" r="1.6"/></svg>
         </div>
@@ -875,28 +1167,28 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
       <p>Kami bekerja rapi, jujur soal harga, dan bertanggung jawab atas hasilnya.</p>
     </div>
     <div class="grid-keunggulan">
-      <div class="keunggulan-item">
+      <div class="keunggulan-item reveal ">
         <div class="keunggulan-ikon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
         <h3>Teknisi Berpengalaman</h3>
         <p>Teknisi terlatih, teliti, dan bekerja rapi.</p>
       </div>
-      <div class="keunggulan-item">
+      <div class="keunggulan-item reveal d1">
         <div class="keunggulan-ikon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
         <h3>Bergaransi</h3>
         <p>Setiap pekerjaan ada garansi. Kalau ada masalah, kami kembali.</p>
       </div>
-      <div class="keunggulan-item">
+      <div class="keunggulan-item reveal d2">
         <div class="keunggulan-ikon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
         <h3>Harga Bersahabat</h3>
         <p>Harga transparan sejak awal. Tidak ada biaya dadakan.</p>
       </div>
-      <div class="keunggulan-item">
+      <div class="keunggulan-item reveal d3">
         <div class="keunggulan-ikon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
@@ -915,7 +1207,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
       <p>Kami datang ke lokasi Anda. Pilih area untuk melihat cakupan lengkapnya.</p>
     </div>
     <div class="area-grid">
-      <article class="area-kartu">
+      <article class="area-kartu reveal ">
         <h3>Solo</h3>
         <p>Melayani seluruh wilayah Kota Surakarta, termasuk area pusat kota dan pinggiran.</p>
         <div class="kec">Laweyan, Serengan, Pasar Kliwon, Jebres, Banjarsari</div>
@@ -924,7 +1216,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </article>
-      <article class="area-kartu">
+      <article class="area-kartu reveal d1">
         <h3>Sukoharjo</h3>
         <p>Termasuk Kartasura, Grogol, Baki, dan seluruh kecamatan di Kabupaten Sukoharjo.</p>
         <div class="kec">Kartasura, Grogol, Baki, Nguter, Bendosari, Polokarto, dan 6 kecamatan lain</div>
@@ -933,7 +1225,7 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </article>
-      <article class="area-kartu">
+      <article class="area-kartu reveal d2">
         <h3>Karanganyar</h3>
         <p>Termasuk Jaten, Colomadu, Gondangrejo, dan seluruh kecamatan di Kabupaten Karanganyar.</p>
         <div class="kec">Jaten, Colomadu, Gondangrejo, Karanganyar, Tasikmadu, Mojogedang, dan 6 kecamatan lain</div>
@@ -1035,6 +1327,10 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
     </div>
   </div>
 </footer>
+<a class="fab" id="fabWa" href="https://wa.me/6282147975947?text=Assalamualaikum%20ARTA%20TEKNIK%2C%20saya%20butuh%20bantuan." target="_blank" rel="noopener" aria-label="Chat WhatsApp ARTA TEKNIK">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 2a8 8 0 016.9 12l-.4.6 1 3.5-3.6-1-.6.4A8 8 0 1112 4zm-3.3 4c-.2 0-.5.1-.7.4-.3.3-.9 1-.9 2s.7 2.1.8 2.2c.1.2 1.4 2.2 3.4 3 1.7.7 2 .6 2.4.5.4 0 1.2-.4 1.4-1 .2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3l-1.4-.7c-.2-.1-.4-.1-.5.1l-.6.8c-.1.2-.3.2-.5.1-.2-.1-.9-.4-1.7-1.1-.6-.6-1-1.2-1.1-1.4-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5 0-.2 0-.3-.1-.4l-.6-1.5c-.2-.4-.3-.4-.5-.4z"/></svg>
+  <span>Chat WhatsApp</span>
+</a>
 <script>
 (function(){
   var h = document.getElementById('header');
@@ -1053,6 +1349,40 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
     if(e.key === 'Escape' && nav.classList.contains('open')){ tutup(); btn.focus(); }
   });
   window.addEventListener('resize', function(){ if(window.innerWidth > 900) tutup(); });
+
+  /* --- Tab hero v3 (Servis AC / Pasang CCTV) --- */
+  var pasang = [['tAC','sAC'],['tCCTV','sCCTV']];
+  pasang.forEach(function(p){
+    var tombol = document.getElementById(p[0]);
+    if(!tombol) return;
+    tombol.addEventListener('click', function(){
+      pasang.forEach(function(q){
+        var aktif = (q[0] === p[0]);
+        document.getElementById(q[0]).setAttribute('aria-selected', aktif);
+        document.getElementById(q[1]).classList.toggle('on', aktif);
+      });
+    });
+  });
+
+  /* --- Scroll reveal --- */
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  } else {
+    els.forEach(function(e){ e.classList.add('visible'); });
+  }
+
+  /* --- Tombol WhatsApp melayang --- */
+  var fab = document.getElementById('fabWa');
+  if(fab){
+    function cekFab(){ fab.classList.toggle('show', window.scrollY > 380); }
+    cekFab(); window.addEventListener('scroll', cekFab, {passive:true});
+  }
 })();
 </script>
 </body>
