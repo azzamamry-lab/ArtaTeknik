@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 _*.html
 _css_asli.css
+
+# backup lokal
+*.bak
+_*.py
+.tmpcek/

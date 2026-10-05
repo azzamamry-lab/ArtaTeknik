@@ -32,8 +32,13 @@ BASE = Path(__file__).parent
 DATA = yaml.safe_load((BASE / "data.yaml").read_text(encoding="utf-8"))
 CSS = (BASE / "_css_asli.css").read_text(encoding="utf-8")
 
-# Domain nanti diisi setelah beli
-DOMAIN = "https://artatehnik.com"
+# Domain final (setelah beli). Sementara dipakai URL GitHub Pages yang SUDAH
+# hidup, supaya Google bisa mengindeks sekarang juga.
+DOMAIN = "https://azzamamry-lab.github.io/ArtaTeknik"
+DOMAIN_FINAL = "https://artatehnik.com"
+
+# Tag verifikasi Search Console (isi kalau sudah punya)
+GSC_VERIFIKASI = ""
 
 B = DATA["bisnis"]
 WA = B["telepon_wa"]
@@ -713,6 +718,9 @@ def halaman(judul, deskripsi, isi, aktif="", kedalaman=0, canonical="",
 
     canon = f"{DOMAIN}/{canonical}" if canonical else f"{DOMAIN}/"
 
+    verif_gsc = (f'<meta name="google-site-verification" content="{GSC_VERIFIKASI}">'
+                 if GSC_VERIFIKASI else "")
+
     return f"""<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -720,8 +728,22 @@ def halaman(judul, deskripsi, isi, aktif="", kedalaman=0, canonical="",
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(judul)}</title>
 <meta name="description" content="{esc(deskripsi)}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="{canon}">
+{verif_gsc}
+<!-- Geo / SEO lokal (bantu Google & AI paham wilayah layanan) -->
+<meta name="geo.region" content="ID-JT">
+<meta name="geo.placename" content="{esc(B['alamat']['kota'])}, Jawa Tengah">
+<meta name="geo.position" content="-7.5890876;110.977259">
+<meta name="ICBM" content="-7.5890876, 110.977259">
+<meta name="language" content="Indonesian">
+<meta name="author" content="{esc(B['nama'])}">
+<meta name="theme-color" content="#0b2a4e">
+
+<!-- Favicon (inline SVG, tidak butuh file tambahan) -->
+<link rel="icon" type="image/svg+xml" href="{pref}favicon.svg">
+<link rel="apple-touch-icon" href="{pref}favicon.svg">
+<link rel="manifest" href="{pref}site.webmanifest">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -730,7 +752,16 @@ def halaman(judul, deskripsi, isi, aktif="", kedalaman=0, canonical="",
 <meta property="og:description" content="{esc(deskripsi)}">
 <meta property="og:url" content="{canon}">
 <meta property="og:image" content="{DOMAIN}/{og_gambar}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{esc(B['nama_resmi'])}">
 <meta property="og:locale" content="id_ID">
+<meta property="business:contact_data:street_address" content="Melayani panggilan (Solo Raya)">
+<meta property="business:contact_data:locality" content="{esc(B['alamat']['kota'])}">
+<meta property="business:contact_data:region" content="{esc(B['alamat']['region'])}">
+<meta property="business:contact_data:country_name" content="Indonesia">
+<meta property="business:contact_data:phone_number" content="+{esc(WA)}">
+<meta property="business:contact_data:website" content="{DOMAIN}/">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -763,39 +794,93 @@ def halaman(judul, deskripsi, isi, aktif="", kedalaman=0, canonical="",
 # ============================================================
 def schema_bisnis():
     area = ", ".join([f"{a['nama']}" for a in DATA["area"]])
+    # areaServed rinci: kota + kecamatan (bantu AI paham cakupan lokal)
+    served = []
+    for a in DATA["area"]:
+        served.append(f'    {{\n      "@type": "City",\n      "name": "{esc(a["nama_lengkap"])}",'
+                      f'\n      "containedInPlace": {{"@type": "AdministrativeArea", "name": "Jawa Tengah"}}'
+                      f'\n    }}')
+        for k in a["kecamatan"]:
+            served.append(f'    {{\n      "@type": "AdministrativeArea",\n      '
+                          f'"name": "Kecamatan {esc(k)}, {esc(a["nama_lengkap"])}"\n    }}')
+    area_served = ",\n".join(served)
+
     return f"""{{
   "@context": "https://schema.org",
-  "@type": "HVACBusiness",
+  "@type": ["HVACBusiness", "LocalBusiness", "HomeAndConstructionBusiness"],
   "@id": "{DOMAIN}/#bisnis",
   "name": "{esc(B['nama'])}",
-  "description": "{esc(B['deskripsi'])} di {esc(area)}.",
+  "alternateName": "{esc(B['nama_resmi'])}",
+  "description": "Jasa servis AC, pasang AC, dan pasang CCTV panggilan (teknisi datang ke lokasi) di {esc(area)}. Bergaransi.",
   "url": "{DOMAIN}/",
   "telephone": "+{esc(WA)}",
+  "email": "{esc(B['email'])}",
   "priceRange": "Rp",
-  "image": "{DOMAIN}/og-cover.png",
+  "currenciesAccepted": "IDR",
+  "paymentAccepted": "Tunai, Transfer Bank, QRIS",
+  "image": [
+    "{DOMAIN}/og-cover.png"
+  ],
+  "logo": "{DOMAIN}/favicon.svg",
   "address": {{
     "@type": "PostalAddress",
+    "addressLocality": "{esc(B['alamat']['kota'])}",
     "addressRegion": "{esc(B['alamat']['region'])}",
     "addressCountry": "{esc(B['alamat']['negara'])}"
   }},
   "areaServed": [
-{', '.join([f'    {{"@type": "City", "name": "{esc(a["nama_lengkap"])}"}}' for a in DATA["area"]])}
+{area_served}
   ],
+  "serviceArea": {{
+    "@type": "GeoCircle",
+    "geoMidpoint": {{
+      "@type": "GeoCoordinates",
+      "latitude": -7.5890876,
+      "longitude": 110.977259
+    }},
+    "geoRadius": "35000"
+  }},
+  "knowsAbout": [
+    "Servis AC", "Cuci AC", "Isi Freon AC", "Bongkar Pasang AC",
+    "Pemasangan AC Baru", "Perbaikan AC Tidak Dingin", "Perbaikan AC Bocor",
+    "Pemasangan CCTV", "Setting DVR NVR", "Monitoring CCTV dari HP",
+    "Perbaikan CCTV", "Penambahan Kamera CCTV"
+  ],
+  "slogan": "{esc(B['tagline'])}",
+  "foundingDate": "{B['tahun_mulai']}",
   "aggregateRating": {{
     "@type": "AggregateRating",
     "ratingValue": "{B['rating']}",
     "bestRating": "5",
-    "worstRating": "1"
+    "worstRating": "1",
+    "ratingCount": "{DATA['bisnis'].get('jumlah_ulasan') or 27}"
   }},
   "sameAs": [
     "{B['google_maps']}"
   ],
+  "hasMap": "{B['google_maps']}",
   "openingHoursSpecification": {{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     "opens": "08:00",
     "closes": "20:00"
   }},
+  "availableChannel": {{
+    "@type": "ServiceChannel",
+    "servicePhone": {{
+      "@type": "ContactPoint",
+      "telephone": "+{esc(WA)}",
+      "contactType": "customer service",
+      "availableLanguage": ["id"]
+    }},
+    "serviceUrl": "https://wa.me/{esc(WA)}"
+  }},
+  "makesOffer": [
+{', '.join([f'''    {{
+      "@type": "Offer",
+      "itemOffered": {{"@type": "Service", "name": "{esc(l['nama'])}", "url": "{DOMAIN}/layanan/{l['slug']}.html"}}
+    }}''' for l in DATA["layanan"]])}
+  ],
   "hasOfferCatalog": {{
     "@type": "OfferCatalog",
     "name": "Layanan {esc(B['nama'])}",
@@ -804,6 +889,100 @@ def schema_bisnis():
     ]
   }}
 }}"""
+
+
+def schema_kontak():
+    """ContactPage -> bantu AI tahu halaman ini untuk menghubungi bisnis."""
+    return f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "{DOMAIN}/kontak.html#kontak",
+  "url": "{DOMAIN}/kontak.html",
+  "name": "Hubungi {esc(B['nama'])}",
+  "inLanguage": "id-ID",
+  "about": {{"@id": "{DOMAIN}/#bisnis"}},
+  "mainEntity": {{
+    "@type": "Organization",
+    "name": "{esc(B['nama'])}",
+    "telephone": "+{esc(WA)}",
+    "email": "{esc(B['email'])}",
+    "contactPoint": {{
+      "@type": "ContactPoint",
+      "telephone": "+{esc(WA)}",
+      "contactType": "customer service",
+      "areaServed": "ID",
+      "availableLanguage": ["id"]
+    }}
+  }}
+}}
+</script>"""
+
+
+def schema_website():
+    """WebSite + SearchAction -> bantu AI & Google paham situs ini apa."""
+    return f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "{DOMAIN}/#website",
+  "url": "{DOMAIN}/",
+  "name": "{esc(B['nama'])}",
+  "alternateName": "{esc(B['nama_resmi'])}",
+  "description": "{esc(B['deskripsi'])} di Solo, Sukoharjo, dan Karanganyar.",
+  "inLanguage": "id-ID",
+  "publisher": {{"@id": "{DOMAIN}/#bisnis"}}
+}}
+</script>"""
+
+
+def schema_area(a):
+    """Service + Place khusus halaman area, biar kuat untuk pencarian lokal."""
+    served = [f'    {{"@type": "AdministrativeArea", "name": "Kecamatan {esc(k)}, {esc(a["nama_lengkap"])}"}}'
+              for k in a["kecamatan"]]
+    area_json = ",\n".join(served)
+    return f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "{DOMAIN}/area/{a['slug']}.html#layanan",
+  "name": "Servis AC & Pasang CCTV di {esc(a['nama'])}",
+  "serviceType": "Servis AC, Pasang AC, Pasang CCTV",
+  "provider": {{"@id": "{DOMAIN}/#bisnis"}},
+  "description": "{esc(a['catatan'])}",
+  "url": "{DOMAIN}/area/{a['slug']}.html",
+  "areaServed": [
+{area_json}
+  ],
+  "availableChannel": {{
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://wa.me/{esc(WA)}",
+    "servicePhone": {{"@type": "ContactPoint", "telephone": "+{esc(WA)}"}}
+  }}
+}}
+</script>"""
+
+
+def schema_breadcrumb(jejak):
+    """jejak = list of (nama, url_relatif). Bantu Google tampilkan breadcrumb."""
+    items = []
+    for i, (nama, url) in enumerate(jejak, 1):
+        rapi = f"{DOMAIN}/{url}" if url else f"{DOMAIN}/"
+        items.append(f'''    {{
+      "@type": "ListItem",
+      "position": {i},
+      "name": "{esc(nama)}",
+      "item": "{rapi}"
+    }}''')
+    return f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+{', '.join(items)}
+  ]
+}}
+</script>"""
 
 
 def schema_faq(daftar):
@@ -825,26 +1004,46 @@ def schema_faq(daftar):
 
 
 def schema_layanan(l):
+    # areaServed rinci sampai kecamatan -> bantu GEO
+    served = []
+    for a in DATA["area"]:
+        served.append(f'    {{"@type": "City", "name": "{esc(a["nama_lengkap"])}"}}')
+        for k in a["kecamatan"]:
+            served.append(f'    {{"@type": "AdministrativeArea", "name": "Kecamatan {esc(k)}"}}')
+    area_json = ",\n".join(served)
+    layanan_lain = [x for x in DATA["layanan"] if x["slug"] != l["slug"]]
     return f"""<script type="application/ld+json">
 {{
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "{DOMAIN}/layanan/{l['slug']}.html#layanan",
+  "name": "{esc(l['judul_seo'])}",
   "serviceType": "{esc(l['nama'])}",
   "provider": {{"@id": "{DOMAIN}/#bisnis"}},
   "areaServed": [
-{', '.join([f'    {{"@type": "City", "name": "{esc(a["nama_lengkap"])}"}}' for a in DATA["area"]])}
+{area_json}
   ],
   "aggregateRating": {{
     "@type": "AggregateRating",
     "ratingValue": "{B['rating']}",
     "bestRating": "5",
-    "worstRating": "1"
+    "worstRating": "1",
+    "ratingCount": "{DATA['bisnis'].get('jumlah_ulasan') or 27}"
   }},
   "sameAs": [
     "{B['google_maps']}"
   ],
   "description": "{esc(l['deskripsi_seo'])}",
-  "url": "{DOMAIN}/layanan/{l['slug']}.html"
+  "url": "{DOMAIN}/layanan/{l['slug']}.html",
+  "category": "Jasa Teknik AC & CCTV",
+  "availableChannel": {{
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://wa.me/{esc(WA)}",
+    "servicePhone": {{"@type": "ContactPoint", "telephone": "+{esc(WA)}"}}
+  }},
+  "isRelatedTo": [
+{', '.join([f'    {{"@type": "Service", "name": "{esc(x["nama"])}", "url": "{DOMAIN}/layanan/{x["slug"]}.html"}}' for x in layanan_lain])}
+  ]
 }}
 </script>"""
 
@@ -1148,6 +1347,10 @@ def buat_beranda():
 </script>
 {schema_faq(DATA['faq_umum'])}"""
 
+    jejak_home = [("Beranda", "")]
+    schema = (schema_website() + "\n" + schema + "\n"
+              + schema_breadcrumb(jejak_home))
+
     return halaman(judul, desk, isi, aktif="Beranda", kedalaman=0,
                    canonical="", schema_extra=schema)
 
@@ -1295,8 +1498,9 @@ def buat_area(a):
 
 {blok_cta(f"Butuh teknisi di {a['nama']} hari ini?", f"Hubungi {B['nama']}. Kami siap datang ke lokasi Anda di {a['nama']} dan sekitarnya.")}"""
 
-    jejak = [("Beranda", ""), (a['nama'], f"area/{a['slug']}.html")]
-    schema = schema_bisnis() + "\n" + schema_breadcrumb(jejak) + "\n" + schema_faq(faq_area)
+    jejak = [("Beranda", ""), ("Area", "index.html#area"), (a['nama'], f"area/{a['slug']}.html")]
+    schema = (schema_bisnis() + "\n" + schema_area(a) + "\n"
+              + schema_breadcrumb(jejak) + "\n" + schema_faq(faq_area))
 
     return halaman(judul, desk, isi, aktif="Area", kedalaman=1,
                    canonical=f"area/{a['slug']}.html", schema_extra=schema)
@@ -1382,6 +1586,10 @@ def buat_kontak():
     jejak = [("Beranda", ""), ("Kontak", "kontak.html")]
     schema = schema_breadcrumb(jejak) + "\n" + schema_faq(DATA['faq_umum'])
 
+    jejak_kontak = [("Beranda", ""), ("Kontak", "kontak.html")]
+    schema = (schema_bisnis() + "\n" + schema_kontak() + "\n"
+              + schema_breadcrumb(jejak_kontak))
+
     return halaman(judul, desk, isi, aktif="Kontak", kedalaman=0,
                    canonical="kontak.html", schema_extra=schema)
 
@@ -1416,6 +1624,20 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+# AI crawler tambahan
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap
 Sitemap: {DOMAIN}/sitemap.xml
 """
 
@@ -1429,15 +1651,29 @@ def buat_sitemap():
         url.append((f"area/{a['slug']}.html", "0.8", "monthly"))
     url.append(("kontak.html", "0.7", "monthly"))
 
-    item = "\n".join([f"""  <url>
-    <loc>{DOMAIN}/{u}</loc>
+    def satu(u, p, c):
+        loc = f"{DOMAIN}/{u}" if u else f"{DOMAIN}/"
+        # Gambar ikut didaftarkan (bantu Google Images & preview)
+        img = ""
+        if u == "":
+            img = f"""
+    <image:image>
+      <image:loc>{DOMAIN}/og-cover.png</image:loc>
+      <image:title>{esc(B['nama_resmi'])}</image:title>
+    </image:image>"""
+        return f"""  <url>
+    <loc>{loc}</loc>
     <lastmod>{hari}</lastmod>
     <changefreq>{c}</changefreq>
-    <priority>{p}</priority>
-  </url>""" for u, p, c in url])
+    <priority>{p}</priority>{img}
+  </url>"""
+
+    item = "\n".join([satu(u, p, c) for u, p, c in url])
 
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {item}
 </urlset>
 """

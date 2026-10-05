@@ -24,4 +24,18 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://artatehnik.com/sitemap.xml
+# AI crawler tambahan
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap
+Sitemap: https://azzamamry-lab.github.io/ArtaTeknik/sitemap.xml

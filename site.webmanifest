@@ -1,0 +1,19 @@
+{
+  "name": "ARTA TEKNIK — Service AC & CCTV Solo Raya",
+  "short_name": "ARTA TEKNIK",
+  "description": "Spesialis pemasangan, servis, dan perawatan AC & CCTV di Solo, Sukoharjo, dan Karanganyar.",
+  "start_url": "/ArtaTeknik/",
+  "scope": "/ArtaTeknik/",
+  "display": "standalone",
+  "background_color": "#0b2a4e",
+  "theme_color": "#0b2a4e",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
