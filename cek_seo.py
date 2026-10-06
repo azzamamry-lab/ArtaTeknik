@@ -21,8 +21,21 @@ for h in hal:
     src = f.read_text(encoding="utf-8")
     err = []
 
-    # --- 1. JSON-LD valid? ---
-    blok = re.findall(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)
+    # --- 1. JSON-LD valid? (ambil sampai </script>, JANGAN sampai <script lain) ---
+    blok = []
+    for m in re.finditer(r'<script type="application/ld\+json">', src):
+        mulai = m.end()
+        tutup = src.find('</script>', mulai)
+        berikut = src.find('<script type="application/ld+json">', mulai)
+        if tutup == -1:
+            err.append("blok JSON-LD tanpa </script> (akhir file)")
+            continue
+        if berikut != -1 and berikut < tutup:
+            err.append("blok JSON-LD TIDAK DITUTUP (ada <script> lain sebelum </script>) "
+                       "-> HALAMAN TAMPIL MENTAH")
+            continue
+        blok.append(src[mulai:tutup])
+
     tipe = []
     for i, b in enumerate(blok, 1):
         try:
@@ -31,6 +44,13 @@ for h in hal:
             tipe.append(t if isinstance(t, str) else "/".join(t) if t else "?")
         except Exception as e:
             err.append(f"JSON-LD #{i} TIDAK VALID: {e}")
+
+    # --- 1b. KESEIMBANGAN <script> vs </script> (bug fatal: halaman tampil mentah) ---
+    n_buka = len(re.findall(r'<script\b', src))
+    n_tutup = len(re.findall(r'</script>', src))
+    if n_buka != n_tutup:
+        err.append(f"script tidak seimbang: {n_buka} buka vs {n_tutup} tutup "
+                   f"-> HALAMAN BISA TAMPIL SEBAGAI TEKS MENTAH")
 
     # --- 2. Tag wajib ada? ---
     wajib = {
@@ -70,6 +90,24 @@ for h in hal:
     pp = P(); pp.feed(src)
     if pp.stack: err.append(f"tag tidak tertutup: {pp.stack}")
     if pp.e: err.append(f"tag error: {pp.e}")
+
+    # --- 5b. SIMULASI BROWSER: pastikan JSON-LD tidak bocor jadi teks halaman ---
+    class _Sim(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.dalam = False
+            self.teks = []
+        def handle_starttag(self, t, a):
+            if t == 'script': self.dalam = True
+        def handle_endtag(self, t):
+            if t == 'script': self.dalam = False
+        def handle_data(self, d):
+            if not self.dalam and d.strip(): self.teks.append(d.strip())
+
+    sim = _Sim(); sim.feed(src)
+    teks_hal = " ".join(sim.teks)
+    if '"@context"' in teks_hal or '"@type"' in teks_hal:
+        err.append("JSON-LD BOCOR jadi teks halaman -> halaman tampil MENTAH")
 
     # --- 6. h1 harus tepat 1 ---
     n_h1 = len(re.findall(r'<h1', src))

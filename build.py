@@ -805,7 +805,8 @@ def schema_bisnis():
                           f'"name": "Kecamatan {esc(k)}, {esc(a["nama_lengkap"])}"\n    }}')
     area_served = ",\n".join(served)
 
-    return f"""{{
+    return f"""<script type="application/ld+json">
+{{
   "@context": "https://schema.org",
   "@type": ["HVACBusiness", "LocalBusiness", "HomeAndConstructionBusiness"],
   "@id": "{DOMAIN}/#bisnis",
@@ -888,7 +889,8 @@ def schema_bisnis():
 {', '.join([f'''      {{"@type": "Offer", "itemOffered": {{"@type": "Service", "name": "{esc(l['nama'])}", "url": "{DOMAIN}/layanan/{l['slug']}.html"}}}}''' for l in DATA["layanan"]])}
     ]
   }}
-}}"""
+}}
+</script>"""
 
 
 def schema_kontak():
@@ -1342,9 +1344,7 @@ def buat_beranda():
 
 {blok_cta()}"""
 
-    schema = f"""<script type="application/ld+json">
-{schema_bisnis()}
-</script>
+    schema = f"""{schema_bisnis()}
 {schema_faq(DATA['faq_umum'])}"""
 
     jejak_home = [("Beranda", "")]
