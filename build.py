@@ -78,8 +78,29 @@ header.gulir{box-shadow:0 6px 24px rgba(11,42,78,.09)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
 .brand svg{width:40px;height:40px;flex-shrink:0}
-.nm-brand{font-size:17.5px;font-weight:800;color:var(--navy);line-height:1.1;
-  display:block;letter-spacing:.1px}
+/* Logo asli ARTA TEKNIK (versi putih) - butuh latar navy supaya terlihat */
+.brand-logo{width:auto;height:30px;flex-shrink:0;
+  background:#0b2a4e;border-radius:8px;padding:5px 8px;box-sizing:content-box;
+  transition:transform .4s var(--ease);
+  image-rendering:-webkit-optimize-contrast}
+.brand:hover .brand-logo{transform:rotate(-6deg) scale(1.05)}
+.brand-logo-foot{width:auto;height:28px;flex-shrink:0;
+  background:#10345f;border-radius:7px;padding:4px 7px;box-sizing:content-box;
+  image-rendering:-webkit-optimize-contrast}
+/* Logo besar di hero (kanan atas teks) */
+.hero-logo{
+  width:auto;height:132px;display:block;margin:0 0 24px;
+  filter:drop-shadow(0 8px 26px rgba(244,180,0,.28));
+  animation:logoMasuk .9s var(--ease) both;
+  image-rendering:-webkit-optimize-contrast;
+}
+@keyframes logoMasuk{
+  from{opacity:0;transform:translateY(-10px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:600px){ .hero-logo{height:100px;margin-bottom:18px} }
+.nm-brand{font-size:17.5px;font-weight:800;color:var(--navy);line-height:1.15;
+  display:block;letter-spacing:.1px;margin-bottom:1px}
 .sub-brand{font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;
   color:var(--blue);font-weight:700;display:block}
 nav{display:flex;align-items:center;gap:24px}
@@ -574,11 +595,8 @@ def header(aktif=""):
     return f"""<header id="header">
   <div class="container bar">
     <a class="brand" href="{_rel('index.html')}">
-      <svg viewBox="0 0 48 48" width="40" height="40" role="img" aria-label="Logo {esc(B['nama'])}">
-        <rect x="4" y="4" width="40" height="40" rx="11" fill="#0b2a4e"/>
-        <path d="M24 13l11 6v11l-11 6-11-6V19z" fill="none" stroke="#f4b400" stroke-width="2.2" stroke-linejoin="round"/>
-        <circle cx="24" cy="24" r="4" fill="#f4b400"/>
-      </svg>
+      <img class="brand-logo" src="{_rel('img/logo-ikon.png')}" width="50" height="30"
+           alt="Logo {esc(B['nama'])}" loading="eager" decoding="async">
       <span>
         <span class="nm-brand">{esc(B['nama'])}</span>
         <span class="sub-brand">{esc(B['tagline'])}</span>
@@ -598,11 +616,8 @@ def footer():
     <div class="foot">
       <div>
         <div class="brand-foot">
-          <svg viewBox="0 0 48 48" width="38" height="38" role="img" aria-label="Logo {esc(B['nama'])}">
-            <rect x="4" y="4" width="40" height="40" rx="11" fill="#10345f"/>
-            <path d="M24 13l11 6v11l-11 6-11-6V19z" fill="none" stroke="#f4b400" stroke-width="2.2" stroke-linejoin="round"/>
-            <circle cx="24" cy="24" r="4" fill="#f4b400"/>
-          </svg>
+          <img class="brand-logo-foot" src="{_rel('img/logo-ikon.png')}" width="47" height="28"
+               alt="Logo {esc(B['nama'])}" loading="lazy" decoding="async">
           <span class="nm-foot">{esc(B['nama'])}</span>
         </div>
         <p>{esc(B['deskripsi'])} di Solo, Sukoharjo, dan Karanganyar.</p>
@@ -741,8 +756,9 @@ def halaman(judul, deskripsi, isi, aktif="", kedalaman=0, canonical="",
 <meta name="theme-color" content="#0b2a4e">
 
 <!-- Favicon (inline SVG, tidak butuh file tambahan) -->
-<link rel="icon" type="image/svg+xml" href="{pref}favicon.svg">
-<link rel="apple-touch-icon" href="{pref}favicon.svg">
+<link rel="icon" type="image/png" sizes="256x256" href="{pref}favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{pref}favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{pref}img/apple-touch-icon.png">
 <link rel="manifest" href="{pref}site.webmanifest">
 
 <!-- Open Graph -->
@@ -1232,6 +1248,8 @@ def buat_beranda():
   <div class="hero-grid-lines"></div>
   <div class="container hero-inner">
     <div>
+      <img class="hero-logo" src="{_rel('img/logo-putih.png')}" width="201" height="132"
+           alt="Logo {esc(B['nama'])} - Spesialis AC dan CCTV" loading="eager" decoding="async">
       <span class="hero-badge">
         <span class="dot"></span> Spesialis AC &amp; CCTV · Solo Raya
       </span>
