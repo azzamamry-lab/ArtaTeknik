@@ -5,9 +5,15 @@ from pathlib import Path
 from html.parser import HTMLParser
 
 BASE = Path(__file__).parent
-hal = ["index.html", "layanan/servis-ac.html", "layanan/pasang-ac.html",
-       "layanan/pasang-cctv.html", "area/solo.html", "area/sukoharjo.html",
+hal = ["index.html", "layanan/ac.html", "layanan/pasang-cctv.html",
+       "area/solo.html", "area/sukoharjo.html",
        "area/karanganyar.html", "kontak.html"]
+
+# Halaman redirect: cukup cek tujuan & canonical, tidak perlu schema penuh
+redirect_harus_ada = {
+    "layanan/servis-ac.html": "layanan/ac.html",
+    "layanan/pasang-ac.html": "layanan/ac.html",
+}
 
 VOID = {'meta','link','img','br','hr','input','source','rect','circle','path',
         'text','stop','use','area','base','col','embed','param','track','wbr',
@@ -157,11 +163,33 @@ for k, v in dub_d.items(): print(f"     -> {v}")
 print(f"  title duplikat     : {len(dub_t)}")
 for k, v in dub_t.items(): print(f"     -> {v}")
 
+# --- cek halaman redirect ---
+print("\n" + "=" * 78)
+print("  HALAMAN REDIRECT (URL lama)")
+print("=" * 78)
+for lama, tujuan in redirect_harus_ada.items():
+    f = BASE / lama
+    if not f.exists():
+        print(f"  [GAGAL] {lama} -> TIDAK ADA")
+        masalah_total.append((lama, ["file redirect tidak ada"]))
+        continue
+    t = f.read_text(encoding="utf-8")
+    ok_canon = f'rel="canonical" href="' in t and tujuan in t
+    ok_refresh = "http-equiv=\"refresh\"" in t
+    ok_noindex = "noindex" in t
+    ok_js = "location.replace" in t
+    semua = ok_canon and ok_refresh and ok_noindex and ok_js
+    print(f"  [{'OK  ' if semua else 'GAGAL'}] {lama} -> {tujuan}")
+    if not semua:
+        masalah_total.append((lama, ["redirect tidak lengkap"]))
+
 # --- cek file pendukung ADA ---
 print("\n" + "=" * 78)
 print("  FILE PENDUKUNG")
 print("=" * 78)
-for f in ["og-cover.png", "favicon.svg", "site.webmanifest", "robots.txt", "sitemap.xml"]:
+for f in ["og-cover.png", "favicon.png", "favicon-32.png", "site.webmanifest",
+          "robots.txt", "sitemap.xml", "img/logo-putih.png", "img/logo-ikon.png",
+          "img/apple-touch-icon.png"]:
     p = BASE / f
     print(f"  {'ADA  ' if p.exists() else 'HILANG'} {f}" + (f"  ({p.stat().st_size} bytes)" if p.exists() else ""))
 

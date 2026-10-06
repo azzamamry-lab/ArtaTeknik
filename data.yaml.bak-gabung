@@ -45,11 +45,10 @@ keunggulan:
 
 # Layanan — tiap layanan jadi halaman sendiri
 layanan:
-  - slug: "ac"
-    nama: "AC"
-    judul_h1: "Servis, Cuci &amp; Pasang AC"
-    judul_seo: "Jasa Servis, Cuci & Pasang AC Solo, Sukoharjo, Karanganyar"
-    deskripsi_seo: "Jasa servis AC, cuci AC, isi freon, pasang AC baru, dan bongkar pasang di Solo, Sukoharjo, dan Karanganyar. Teknisi datang ke lokasi, kerja rapi, bergaransi."
+  - slug: "servis-ac"
+    nama: "Servis AC"
+    judul_seo: "Jasa Servis AC Solo, Sukoharjo, Karanganyar"
+    deskripsi_seo: "Jasa servis AC panggilan di Solo, Sukoharjo, dan Karanganyar. AC tidak dingin, bocor, berisik, atau bau? Teknisi datang ke lokasi. Bergaransi."
     masalah:
       - "AC tidak dingin atau kurang dingin"
       - "AC bocor atau meneteskan air"
@@ -57,10 +56,6 @@ layanan:
       - "AC bau tidak sedap"
       - "AC mati total atau sering mati sendiri"
       - "AC lama tidak pernah dicuci"
-      - "AC baru belum dipasang"
-      - "AC mau dipindah karena pindah rumah atau kos"
-      - "Pemasangan lama kurang rapi atau bocor"
-      - "Ingin menambah unit AC di ruangan baru"
     pekerjaan:
       - "Cuci AC (indoor dan outdoor)"
       - "Isi freon (R32, R410, R22)"
@@ -68,6 +63,25 @@ layanan:
       - "Ganti kapasitor, thermistor, atau PCB"
       - "Perbaikan kipas indoor dan outdoor"
       - "Cek dan perbaikan kelistrikan"
+    faq:
+      - q: "Berapa lama servis AC?"
+        a: "Untuk cuci AC sekitar 30-45 menit per unit. Kalau ada perbaikan, bisa 1-2 jam tergantung kerusakan."
+      - q: "Apakah bisa hari ini?"
+        a: "Bisa, selama slot masih ada. Hubungi kami dulu untuk memastikan jadwal."
+      - q: "Apakah ada garansi?"
+        a: "Ada. Setiap pekerjaan bergaransi. Kalau dalam masa garansi ada masalah yang sama, kami perbaiki lagi tanpa biaya jasa."
+
+  - slug: "pasang-ac"
+    nama: "Pasang AC"
+    judul_seo: "Jasa Pasang AC Baru & Bongkar Pasang | Solo Raya"
+    deskripsi_seo: "Jasa pemasangan AC baru dan bongkar pasang AC di Solo, Sukoharjo, Karanganyar. Pemasangan rapi, vakum sesuai standar, bergaransi."
+    masalah:
+      - "AC baru belum dipasang"
+      - "AC mau dipindah karena pindah rumah atau kos"
+      - "Pemasangan lama kurang rapi atau bocor"
+      - "Butuh pipa tambahan atau kabel tambahan"
+      - "Ingin menambah unit AC di ruangan baru"
+    pekerjaan:
       - "Pasang AC baru (indoor dan outdoor)"
       - "Bongkar pasang AC (pindahan)"
       - "Pemasangan pipa, kabel, dan bracket"
@@ -75,22 +89,15 @@ layanan:
       - "Tes tekanan dan tes dingin"
       - "Konsultasi posisi indoor paling tepat"
     faq:
-      - q: "Berapa lama servis AC?"
-        a: "Untuk cuci AC sekitar 30-45 menit per unit. Kalau ada perbaikan, bisa 1-2 jam tergantung kerusakan."
       - q: "Berapa lama pemasangan AC?"
         a: "Untuk AC baru standar sekitar 1,5-2,5 jam per unit, tergantung tingkat kesulitan dan panjang pipa."
       - q: "Apakah sudah termasuk pipa?"
         a: "Paket standar termasuk pipa sesuai batas yang disepakati. Kalau butuh tambahan, biaya disampaikan lebih dulu sebelum dikerjakan."
-      - q: "Apakah bisa hari ini?"
-        a: "Bisa, selama slot masih ada. Hubungi kami dulu untuk memastikan jadwal."
       - q: "Apakah bisa pasang di hari Sabtu?"
         a: "Bisa. Kami buka Senin sampai Sabtu."
-      - q: "Apakah ada garansi?"
-        a: "Ada. Setiap pekerjaan bergaransi 7 hari. Kalau dalam masa garansi ada masalah yang sama, kami perbaiki lagi tanpa biaya jasa."
 
   - slug: "pasang-cctv"
-    nama: "CCTV"
-    judul_h1: "Pasang &amp; Servis CCTV"
+    nama: "Pasang CCTV"
     judul_seo: "Jasa Pasang & Servis CCTV | Solo, Sukoharjo, Karanganyar"
     deskripsi_seo: "Jasa pemasangan CCTV untuk rumah, toko, kantor, dan pabrik di Solo Raya. Setting sampai bisa dilihat dari HP. Bergaransi."
     masalah:

@@ -6,8 +6,7 @@ Baca data.yaml -> hasilkan semua halaman HTML.
 
 Struktur keluaran:
     index.html                    (beranda)
-    layanan/servis-ac.html
-    layanan/pasang-ac.html
+    layanan/ac.html
     layanan/pasang-cctv.html
     area/solo.html
     area/sukoharjo.html
@@ -39,6 +38,13 @@ DOMAIN_FINAL = "https://artatehnik.com"
 
 # Tag verifikasi Search Console (isi kalau sudah punya)
 GSC_VERIFIKASI = ""
+
+# URL lama yang sudah tersebar -> arahkan ke halaman baru.
+# Jangan dihapus: link di WhatsApp/Google/sosmed bisa masih pakai URL lama.
+REDIRECT = {
+    "layanan/servis-ac.html": "layanan/ac.html",
+    "layanan/pasang-ac.html": "layanan/ac.html",
+}
 
 B = DATA["bisnis"]
 WA = B["telepon_wa"]
@@ -582,8 +588,7 @@ def blok_trust():
 def header(aktif=""):
     menu = [
         ("Beranda", "index.html"),
-        ("Servis AC", "layanan/servis-ac.html"),
-        ("Pasang AC", "layanan/pasang-ac.html"),
+        ("AC", "layanan/ac.html"),
         ("CCTV", "layanan/pasang-cctv.html"),
         ("Area", "area/solo.html"),
         ("Kontak", "kontak.html"),
@@ -625,8 +630,7 @@ def footer():
       <div>
         <h4>Layanan</h4>
         <ul>
-          <li><a href="{_rel('layanan/servis-ac.html')}">Servis AC</a></li>
-          <li><a href="{_rel('layanan/pasang-ac.html')}">Pasang AC</a></li>
+          <li><a href="{_rel('layanan/ac.html')}">Layanan AC</a></li>
           <li><a href="{_rel('layanan/pasang-cctv.html')}">Pasang CCTV</a></li>
         </ul>
       </div>
@@ -1260,7 +1264,7 @@ def buat_beranda():
           <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 2a8 8 0 016.9 12l-.4.6 1 3.5-3.6-1-.6.4A8 8 0 1112 4zm-3.3 4c-.2 0-.5.1-.7.4-.3.3-.9 1-.9 2s.7 2.1.8 2.2c.1.2 1.4 2.2 3.4 3 1.7.7 2 .6 2.4.5.4 0 1.2-.4 1.4-1 .2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3l-1.4-.7c-.2-.1-.4-.1-.5.1l-.6.8c-.1.2-.3.2-.5.1-.2-.1-.9-.4-1.7-1.1-.6-.6-1-1.2-1.1-1.4-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5 0-.2 0-.3-.1-.4l-.6-1.5c-.2-.4-.3-.4-.5-.4z"/></svg>
           Chat WhatsApp
         </a>
-        <a class="btn btn-ghost" href="{_rel('layanan/servis-ac.html')}">
+        <a class="btn btn-ghost" href="{_rel('layanan/ac.html')}">
           Lihat Layanan
           <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1384,7 +1388,7 @@ def buat_layanan(l):
       <a href="{_rel('index.html')}#layanan">Layanan</a><span>/</span>
       {esc(l['nama'])}
     </div>
-    <h1>{esc(l['nama'])}</h1>
+    <h1>{l.get('judul_h1') or esc(l['nama'])}</h1>
     <p class="lede">{esc(l['deskripsi_seo'])}</p>
     <div class="hero-cta">
       <a class="btn btn-wa" href="{wa_pesan(f"Assalamualaikum {B['nama']}, saya butuh {l['nama'].lower()}.")}" target="_blank" rel="noopener">Chat WhatsApp</a>
@@ -1698,6 +1702,47 @@ def buat_sitemap():
 
 
 # ============================================================
+# HALAMAN REDIRECT (URL lama -> URL baru)
+# ============================================================
+def buat_redirect(tujuan, judul="Halaman Dipindahkan"):
+    """Halaman redirect: bawa pengunjung & Google ke URL baru.
+
+    Dipakai untuk URL lama (servis-ac, pasang-ac) supaya link yang
+    sudah tersebar di WhatsApp/Google tidak mati, dan sinyal SEO
+    (peringkat) dialihkan ke halaman baru.
+    """
+    return f"""<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(judul)} - {esc(B['nama'])}</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="{DOMAIN}/{tujuan}">
+<meta http-equiv="refresh" content="0; url={DOMAIN}/{tujuan}">
+<style>
+  body{{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:#0b2a4e;color:#fff;margin:0;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}}
+  .k{{max-width:440px}}
+  h1{{font-size:1.4rem;margin:0 0 10px}}
+  p{{color:#b9cbe4;line-height:1.6;margin:0 0 22px;font-size:.95rem}}
+  a{{display:inline-block;background:#f4b400;color:#0b2a4e;font-weight:800;
+    text-decoration:none;padding:13px 26px;border-radius:11px}}
+</style>
+<script>window.location.replace("{DOMAIN}/{tujuan}");</script>
+</head>
+<body>
+  <div class="k">
+    <h1>Halaman dipindahkan</h1>
+    <p>Informasi ini sekarang ada di halaman baru. Anda akan diarahkan otomatis.</p>
+    <a href="{DOMAIN}/{tujuan}">Lanjut ke halaman baru</a>
+  </div>
+</body>
+</html>"""
+
+
+# ============================================================
 # JALANKAN
 # ============================================================
 def main():
@@ -1719,6 +1764,13 @@ def main():
         f = BASE / "layanan" / f"{l['slug']}.html"
         f.write_text(buat_layanan(l), encoding="utf-8")
         daftar.append((f"layanan/{l['slug']}.html", l['nama']))
+
+    # Redirect URL lama -> halaman baru (link lama tetap hidup)
+    for lama, tujuan in REDIRECT.items():
+        f = BASE / lama
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(buat_redirect(tujuan), encoding="utf-8")
+        daftar.append((lama, f"redirect -> {tujuan}"))
 
     # Area
     for a in DATA["area"]:
