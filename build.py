@@ -1247,7 +1247,7 @@ def buat_beranda():
       </div>
       <div class="hero-stats-v3">
         <div class="hsv"><b>{B['rating']}/5</b><span>Rating Google</span></div>
-        <div class="hsv"><b>30 Hari</b><span>Garansi pekerjaan</span></div>
+        <div class="hsv"><b>7 Hari</b><span>Garansi pekerjaan</span></div>
         <div class="hsv"><b>3 Kota</b><span>Solo · Sukoharjo · Karanganyar</span></div>
       </div>
     </div>
