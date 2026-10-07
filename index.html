@@ -463,6 +463,33 @@ header.gulir{box-shadow:0 6px 24px rgba(11,42,78,.09)}
   background:#10345f;border-radius:7px;padding:4px 7px;box-sizing:content-box;
   image-rendering:-webkit-optimize-contrast}
 /* Logo besar di hero (kanan atas teks) */
+/* KOTAK CATATAN MATERIAL (info penting: harga jasa saja) */
+.catatan-material{
+  max-width:640px;margin:20px auto 0;display:flex;gap:14px;align-items:flex-start;
+  background:#fff8e6;border:1.5px solid #f4b400;border-left:5px solid #f4b400;
+  border-radius:14px;padding:16px 18px;
+}
+.catatan-material-ikon{width:34px;height:34px;flex-shrink:0;border-radius:50%;
+  background:#f4b400;color:#0b2a4e;display:grid;place-items:center}
+.catatan-material-ikon svg{width:19px;height:19px}
+.catatan-material b{display:block;color:#7a5200;font-size:14.5px;margin-bottom:5px;line-height:1.35}
+.catatan-material p{margin:0;color:#6b5a2e;font-size:13.5px;line-height:1.6}
+@media(max-width:600px){
+  .catatan-material{
+    padding:16px 15px 18px;gap:12px;
+    flex-direction:column;
+  }
+  .catatan-material-ikon{width:30px;height:30px}
+  .catatan-material b{font-size:14px;line-height:1.4}
+  .catatan-material p{font-size:13.5px;line-height:1.65}
+  .price-list{margin-bottom:0 !important}
+  .price-amount-sm{font-size:10px;padding:8px 10px}
+}
+/* beri ruang bawah di section harga supaya tombol WhatsApp
+   mengambang tidak menutupi teks catatan saat halaman di-scroll */
+#harga{padding-bottom:64px}
+@media(max-width:760px){ #harga{padding-bottom:120px} }
+
 .hero-logo{
   width:auto;height:132px;display:block;margin:0 0 24px;
   filter:drop-shadow(0 8px 26px rgba(244,180,0,.28));
@@ -869,6 +896,8 @@ nav .btn::after{display:none}
 
 /* ---------- Footer ---------- */
 footer{background:linear-gradient(180deg,#0a1f3a,#061a30);position:relative;overflow:hidden}
+/* beri ruang bawah supaya tombol WhatsApp mengambang tidak menutupi teks terakhir */
+@media(max-width:760px){ footer{padding-bottom:96px !important} }
 footer::before{content:"";position:absolute;left:-120px;top:-140px;width:420px;height:420px;
   border-radius:50%;background:radial-gradient(circle,rgba(28,95,176,.16),transparent 70%)}
 

@@ -94,6 +94,33 @@ header.gulir{box-shadow:0 6px 24px rgba(11,42,78,.09)}
   background:#10345f;border-radius:7px;padding:4px 7px;box-sizing:content-box;
   image-rendering:-webkit-optimize-contrast}
 /* Logo besar di hero (kanan atas teks) */
+/* KOTAK CATATAN MATERIAL (info penting: harga jasa saja) */
+.catatan-material{
+  max-width:640px;margin:20px auto 0;display:flex;gap:14px;align-items:flex-start;
+  background:#fff8e6;border:1.5px solid #f4b400;border-left:5px solid #f4b400;
+  border-radius:14px;padding:16px 18px;
+}
+.catatan-material-ikon{width:34px;height:34px;flex-shrink:0;border-radius:50%;
+  background:#f4b400;color:#0b2a4e;display:grid;place-items:center}
+.catatan-material-ikon svg{width:19px;height:19px}
+.catatan-material b{display:block;color:#7a5200;font-size:14.5px;margin-bottom:5px;line-height:1.35}
+.catatan-material p{margin:0;color:#6b5a2e;font-size:13.5px;line-height:1.6}
+@media(max-width:600px){
+  .catatan-material{
+    padding:16px 15px 18px;gap:12px;
+    flex-direction:column;
+  }
+  .catatan-material-ikon{width:30px;height:30px}
+  .catatan-material b{font-size:14px;line-height:1.4}
+  .catatan-material p{font-size:13.5px;line-height:1.65}
+  .price-list{margin-bottom:0 !important}
+  .price-amount-sm{font-size:10px;padding:8px 10px}
+}
+/* beri ruang bawah di section harga supaya tombol WhatsApp
+   mengambang tidak menutupi teks catatan saat halaman di-scroll */
+#harga{padding-bottom:64px}
+@media(max-width:760px){ #harga{padding-bottom:120px} }
+
 .hero-logo{
   width:auto;height:132px;display:block;margin:0 0 24px;
   filter:drop-shadow(0 8px 26px rgba(244,180,0,.28));
@@ -505,6 +532,8 @@ nav .btn::after{display:none}
 
 /* ---------- Footer ---------- */
 footer{background:linear-gradient(180deg,#0a1f3a,#061a30);position:relative;overflow:hidden}
+/* beri ruang bawah supaya tombol WhatsApp mengambang tidak menutupi teks terakhir */
+@media(max-width:760px){ footer{padding-bottom:96px !important} }
 footer::before{content:"";position:absolute;left:-120px;top:-140px;width:420px;height:420px;
   border-radius:50%;background:radial-gradient(circle,rgba(28,95,176,.16),transparent 70%)}
 
@@ -1156,6 +1185,57 @@ def blok_cta(judul=None, teks=None):
 </section>"""
 
 
+def blok_harga(l):
+    """Blok daftar harga + catatan bahwa itu JASA saja (bukan material)."""
+    if not l.get("harga"):
+        return ""
+
+    ikon_tool = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
+    ikon_dots = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg>'
+
+    baris = ""
+    for h in l["harga"]:
+        iko = ikon_dots if not h["nominal"] else ikon_tool
+        kelas_ikon = "price-icon price-icon-dots" if not h["nominal"] else "price-icon"
+        if h["nominal"]:
+            harga_html = f'<span class="price-amount">Rp{h["nominal"]}</span>'
+        else:
+            harga_html = '<span class="price-amount price-amount-sm">Harga<br>menyesuaikan</span>'
+        baris += f"""          <div class="price-item">
+            <span class="{kelas_ikon}">{iko}</span>
+            <span class="price-text"><span class="price-title">{esc(h['nama'])}</span><span class="price-sub">{esc(h['sub'])}</span></span>
+            {harga_html}
+          </div>
+"""
+
+    catatan = ""
+    if l.get("catatan_harga"):
+        catatan = f"""
+    <div class="catatan-material">
+      <div class="catatan-material-ikon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      </div>
+      <div>
+        <b>Harga di atas hanya biaya jasa, bukan termasuk material</b>
+        <p>{esc(l['catatan_harga'])}</p>
+      </div>
+    </div>"""
+
+    return f"""<section class="section section-abu" id="harga">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">Daftar Harga</span>
+      <h2>Harga Jasa {esc(l['nama'])}</h2>
+      <p>Transparan sejak awal. Tidak ada biaya dadakan.</p>
+    </div>
+    <div class="price-list" style="max-width:640px;margin:0 auto">
+{baris}    </div>{catatan}
+  </div>
+</section>
+
+"""
+
+
 def blok_kartu_layanan():
     kartu = ""
     kelas_huruf = ["", "d1", "d2"]
@@ -1429,6 +1509,8 @@ def buat_layanan(l):
     </div>
   </div>
 </section>
+
+{blok_harga(l)}
 
 {blok_keunggulan()}
 
