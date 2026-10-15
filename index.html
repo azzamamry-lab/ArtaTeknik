@@ -753,6 +753,26 @@ footer{background:var(--navy-3);color:rgba(255,255,255,.72);padding:52px 0 30px;
   .cta-akhir{padding:60px 0}
 }
 
+/* --- Builder paket custom --- */
+.builder{background:#fff;border:1.5px solid var(--sky-border);border-radius:18px;
+  padding:22px 20px;max-width:640px;margin:0 auto;
+  box-shadow:0 3px 14px rgba(11,42,78,.07)}
+.builder-garis{margin-bottom:18px}
+.builder-garis>span{display:block;font-size:13px;font-weight:800;color:var(--navy);
+  margin-bottom:10px;letter-spacing:.3px}
+.builder-pil{display:flex;flex-wrap:wrap;gap:9px}
+.builder-pil button{border:1.5px solid var(--sky-border);background:#f7fafd;color:#31415a;
+  font-size:13.5px;font-weight:700;padding:9px 15px;border-radius:22px;cursor:pointer;
+  font-family:inherit;transition:all .2s}
+.builder-pil button:hover{border-color:var(--navy)}
+.builder-pil button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.builder-harga{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-top:1px dashed var(--sky-border);padding-top:16px;margin-top:4px;flex-wrap:wrap}
+.builder-harga small{font-size:12px;color:var(--muted);font-weight:700}
+.builder-harga b{font-size:24px;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+.builder-wa{margin-top:14px;width:100%;justify-content:center}
+.builder-note{font-size:12.5px;color:var(--muted);margin:10px 0 0;text-align:center}
+
 
 /* ============================================================
    ARTA TEKNIK v3 — Premium pass
@@ -1712,6 +1732,32 @@ footer::before{content:"";position:absolute;left:-120px;top:-140px;width:420px;h
   if(fab){
     function cekFab(){ fab.classList.toggle('show', window.scrollY > 380); }
     cekFab(); window.addEventListener('scroll', cekFab, {passive:true});
+  }
+
+  /* --- Builder paket custom CCTV --- */
+  var bd = document.getElementById('builder');
+  if(bd){
+    var HARGA = {kamera: 650000, dvr: 900000, hdd: 950000, pasang: 400000};
+    var st = {kamera: 4, merk: 'Hilook 2MP', dvr: '4 channel', hdd: '1TB'};
+    function rp(n){ return 'Rp' + n.toLocaleString('id-ID'); }
+    function hitung(){
+      var total = st.kamera * HARGA.kamera + HARGA.dvr + HARGA.hdd + HARGA.pasang;
+      document.getElementById('builderTotal').textContent = rp(total);
+      var teks = 'Assalamualaikum ARTA TEKNIK, saya mau paket custom: ' +
+        st.kamera + ' kamera ' + st.merk + ', DVR ' + st.dvr +
+        ', HDD ' + st.hdd + '. Estimasi ' + rp(total) +
+        '. Minta hitungan pasti.';
+      document.getElementById('builderWa').href =
+        'https://wa.me/6282147975947?text=' + encodeURIComponent(teks);
+    }
+    function pil(id, kunci, nilai){
+      var grup = document.querySelectorAll('#' + id + ' button');
+      grup.forEach(function(b){ b.classList.remove('on'); });
+      event.target.classList.add('on');
+      st[kunci] = nilai; hitung();
+    }
+    window.builderPil = pil;
+    hitung();
   }
 })();
 </script>
