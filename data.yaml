@@ -126,17 +126,42 @@ layanan:
     # Patokan modal dari price list distributor JMEDIA Juni 2026.
     harga:
       - nama: "PAKET 2 CCTV WIFI"
-        sub: "2 kamera Ezviz + memory + setting HP"
+        sub: "Praktis tanpa kabel, cocok kos & ruko kecil"
         nominal: "3.200.000"
+        badge: "Paling Praktis"
+        isi:
+          - "2 kamera Ezviz WiFi (indoor/outdoor)"
+          - "Memory penyimpanan tiap kamera"
+          - "Setting pantau dari HP sampai bisa"
+          - "Instalasi + rapikan kabel power"
+          - "Garansi 7 hari"
       - nama: "PAKET 4 CCTV HILOOK"
-        sub: "4 kamera 2MP + DVR + HDD 1TB, terima beres"
+        sub: "Terima beres, paling laris untuk rumah"
         nominal: "4.900.000"
+        badge: "Paling Laris"
+        unggulan: true
+        isi:
+          - "4 kamera Hilook 2MP (indoor + outdoor)"
+          - "DVR 4 channel + HDD 1TB (± 2 minggu rekaman)"
+          - "Setting pantau dari HP sampai bisa"
+          - "Kabel, konektor & instalasi sampai rapi"
+          - "Garansi 7 hari"
       - nama: "PAKET 4 CCTV DAHUA FULL COLOR"
-        sub: "4 kamera full color + DVR + HDD 1TB, terima beres"
+        sub: "Gambar berwarna walau malam hari"
         nominal: "5.500.000"
+        badge: "Gambar Terbaik"
+        isi:
+          - "4 kamera Dahua full color (indoor + outdoor)"
+          - "DVR 4 channel + HDD 1TB (± 2 minggu rekaman)"
+          - "Setting pantau dari HP sampai bisa"
+          - "Kabel, konektor & instalasi sampai rapi"
+          - "Garansi 7 hari"
       - nama: "TAMBAH 1 TITIK KAMERA"
         sub: "Tambah kamera di titik baru"
         nominal: ""
+        isi:
+          - "1 kamera + kabel + setting DVR"
+          - "Harga menyesuaikan merk kamera"
     catatan_harga: "Harga paket sudah termasuk barang, jasa pemasangan, dan setting sampai bisa dilihat dari HP. Survei dan hitung kebutuhan titik kamera tidak dikenakan biaya untuk wilayah Solo Raya. Merk dan jumlah kamera bisa menyesuaikan bujet."
     faq:
       - q: "Apakah bisa dilihat dari HP?"

@@ -1232,54 +1232,88 @@ def blok_cta(judul=None, teks=None):
 
 
 def blok_harga(l):
-    """Blok daftar harga + catatan bahwa itu JASA saja (bukan material)."""
+    """Blok daftar harga. Paket (ada 'isi') tampil sebagai kartu interaktif,
+    jasa satuan tampil sebagai baris ringkas seperti sebelumnya."""
     if not l.get("harga"):
         return ""
 
+    paket = [h for h in l["harga"] if h.get("isi")]
+    satuan = [h for h in l["harga"] if not h.get("isi")]
+
+    kartu_html = ""
+    for h in paket:
+        unggul = " paket-unggulan" if h.get("unggulan") else ""
+        badge = (f'<span class="paket-badge">{esc(h["badge"])}</span>'
+                 if h.get("badge") else "")
+        daftar = "".join(
+            f'<li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="3" stroke-linecap="round" '
+            f'stroke-linejoin="round" aria-hidden="true">'
+            f'<path d="M4 12.5 9.5 18 20 6"/></svg>{esc(x)}</li>'
+            for x in h["isi"])
+        if h.get("nominal"):
+            harga = (f'<div class="paket-harga"><small>Mulai dari</small>'
+                     f'<b>Rp{h["nominal"]}</b></div>'
+                     f'<a class="btn btn-wa paket-wa" href="{wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tanya " + h["nama"] + ".")}" '
+                     f'target="_blank" rel="noopener">Tanya Paket Ini</a>')
+        else:
+            harga = (f'<div class="paket-harga"><b>Harga menyesuaikan</b></div>'
+                     f'<a class="btn btn-wa paket-wa" href="{wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tambah titik kamera.")}" '
+                     f'target="_blank" rel="noopener">Minta Hitungan</a>')
+        kartu_html += f"""      <article class="paket-kartu{unggul}">
+        {badge}
+        <h3>{esc(h['nama'])}</h3>
+        <p class="paket-sub">{esc(h['sub'])}</p>
+        <ul class="paket-isi">
+{daftar}        </ul>
+        {harga}
+      </article>
+"""
+
     ikon_tool = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
-    ikon_dots = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg>'
 
     baris = ""
-    for h in l["harga"]:
-        iko = ikon_dots if not h["nominal"] else ikon_tool
-        kelas_ikon = "price-icon price-icon-dots" if not h["nominal"] else "price-icon"
-        if h["nominal"]:
-            harga_html = f'<span class="price-amount">Rp{h["nominal"]}</span>'
-        else:
-            harga_html = '<span class="price-amount price-amount-sm">Harga<br>menyesuaikan</span>'
+    for h in satuan:
         baris += f"""          <div class="price-item">
-            <span class="{kelas_ikon}">{iko}</span>
+            <span class="price-icon">{ikon_tool}</span>
             <span class="price-text"><span class="price-title">{esc(h['nama'])}</span><span class="price-sub">{esc(h['sub'])}</span></span>
-            {harga_html}
+            <span class="price-amount">Rp{h['nominal']}</span>
           </div>
 """
 
     catatan = ""
     if l.get("catatan_harga"):
+        judul_catatan = ("Yang perlu Mas tahu sebelum pesan" if paket
+                         else "Harga di atas hanya biaya jasa, bukan termasuk material")
         catatan = f"""
     <div class="catatan-material">
       <div class="catatan-material-ikon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
       </div>
       <div>
-        <b>Harga di atas hanya biaya jasa, bukan termasuk material</b>
+        <b>{judul_catatan}</b>
         <p>{esc(l['catatan_harga'])}</p>
       </div>
     </div>"""
+
+    judul_harga = f"Harga Paket {esc(l['nama'])}" if paket else f"Harga Jasa {esc(l['nama'])}"
+    sub_harga = ("Pilih paket yang pas. Semua terima beres: barang + pasang + setting."
+                 if paket else "Transparan sejak awal. Tidak ada biaya dadakan.")
+    kartu_blok = (f'    <div class="paket-grid">\n{kartu_html}    </div>\n'
+                  if kartu_html else "")
+    baris_blok = (f'    <div class="price-list" style="max-width:640px;margin:0 auto">\n{baris}    </div>\n'
+                  if baris else "")
 
     return f"""<section class="section section-abu" id="harga">
   <div class="container">
     <div class="section-title">
       <span class="kicker">Daftar Harga</span>
-      <h2>Harga Jasa {esc(l['nama'])}</h2>
-      <p>Transparan sejak awal. Tidak ada biaya dadakan.</p>
+      <h2>{judul_harga}</h2>
+      <p>{sub_harga}</p>
     </div>
-    <div class="price-list" style="max-width:640px;margin:0 auto">
-{baris}    </div>{catatan}
+{kartu_blok}{baris_blok}{catatan}
   </div>
-</section>
-
-"""
+</section>"""
 
 
 def blok_kartu_layanan():
