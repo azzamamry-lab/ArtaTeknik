@@ -1146,6 +1146,52 @@ def blok_keunggulan():
 </section>"""
 
 
+def blok_paket():
+    """Section paket gabungan AC + CCTV — diferensiasi dari kompetitor."""
+    wa1 = wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tanya Paket Rumah Adem.")
+    wa2 = wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tanya Paket Rumah Aman.")
+    wa3 = wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tanya Paket Usaha Lancar.")
+    return f"""<section class="section" id="paket">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">Paket Hemat</span>
+      <h2>Satu Panggilan, Dua Urusan Beres</h2>
+      <p>Kompetitor jual jasa satuan. Kami bundel AC + CCTV supaya Mas hemat ongkos teknisi dan jadwal cukup sekali datang.</p>
+    </div>
+    <div class="grid-keunggulan">
+      <div class="keunggulan-item reveal">
+        <div class="keunggulan-ikon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
+        </div>
+        <h3>Paket Rumah Adem</h3>
+        <p>Cuci 2 unit AC + check up menyeluruh + isi freon bila perlu (biaya freon terpisah). Cocok untuk rumah yang AC-nya lama tidak diservis.</p>
+        <p><b>Mulai Rp160.000</b> (2 unit, jasa cuci)</p>
+        <a class="btn btn-wa" href="{wa1}" target="_blank" rel="noopener">Tanya Paket Ini</a>
+      </div>
+      <div class="keunggulan-item reveal d1">
+        <div class="keunggulan-ikon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
+        </div>
+        <h3>Paket Rumah Aman</h3>
+        <p>2 kamera CCTV + DVR + setting pantau dari HP + instalasi sampai rapi. Untuk rumah, kos, atau ruko kecil yang belum ada pengawasan.</p>
+        <p><b>Survei &amp; hitung gratis</b> — harga menyesuaikan titik dan merk kamera.</p>
+        <a class="btn btn-wa" href="{wa2}" target="_blank" rel="noopener">Minta Survei Gratis</a>
+      </div>
+      <div class="keunggulan-item reveal d2">
+        <div class="keunggulan-ikon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
+        </div>
+        <h3>Paket Usaha Lancar</h3>
+        <p>Cuci AC berkala (per 3 bulan) + cek CCTV toko/kantor. Satu teknisi langganan yang hafal kondisi tempat usaha Mas. Prioritas jadwal.</p>
+        <p><b>Harga langganan</b> — negosiasi per jumlah unit.</p>
+        <a class="btn btn-wa" href="{wa3}" target="_blank" rel="noopener">Ajukan Langganan</a>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:14px;margin-top:18px">Harga paket jasa di atas belum termasuk material (pipa, kabel, breket, kamera). Material selalu disampaikan dulu sebelum kerja.</p>
+  </div>
+</section>"""
+
+
 def blok_faq(daftar, judul="Pertanyaan yang Sering Diajukan"):
     item = ""
     for i, f in enumerate(daftar):
@@ -1337,8 +1383,8 @@ def buat_beranda():
       <span class="hero-badge">
         <span class="dot"></span> Spesialis AC &amp; CCTV · Solo Raya
       </span>
-      <h1>AC Tidak Dingin?<br>Rumah Belum <em>Aman?</em></h1>
-      <p class="lead">Kami servis AC dan pasang CCTV di Solo, Sukoharjo, dan Karanganyar. Teknisi datang ke lokasi, kerja rapi, bergaransi.</p>
+      <h1>AC Dingin, Rumah Aman.<br>Teknisi Solo <em>Datang Hari Ini.</em></h1>
+      <p class="lead">Servis AC + pasang CCTV satu pintu di Solo, Sukoharjo, dan Karanganyar. Orang Solo asli, harga jasa jelas di awal, garansi 7 hari. Satu panggilan, dua urusan beres.</p>
       <div class="hero-ctas">
         <a class="btn btn-wa" href="{wa_pesan(f"Assalamualaikum {B['nama']}, saya butuh bantuan.")}" target="_blank" rel="noopener">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 2a8 8 0 016.9 12l-.4.6 1 3.5-3.6-1-.6.4A8 8 0 1112 4zm-3.3 4c-.2 0-.5.1-.7.4-.3.3-.9 1-.9 2s.7 2.1.8 2.2c.1.2 1.4 2.2 3.4 3 1.7.7 2 .6 2.4.5.4 0 1.2-.4 1.4-1 .2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3l-1.4-.7c-.2-.1-.4-.1-.5.1l-.6.8c-.1.2-.3.2-.5.1-.2-.1-.9-.4-1.7-1.1-.6-.6-1-1.2-1.1-1.4-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5 0-.2 0-.3-.1-.4l-.6-1.5c-.2-.4-.3-.4-.5-.4z"/></svg>
@@ -1435,6 +1481,8 @@ def buat_beranda():
 {blok_trust()}
 
 {blok_kartu_layanan()}
+
+{blok_paket()}
 
 {blok_rating()}
 
