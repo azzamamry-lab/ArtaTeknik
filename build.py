@@ -1173,8 +1173,8 @@ def blok_paket():
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
         <h3>Paket Rumah Aman</h3>
-        <p>2 kamera CCTV + DVR + setting pantau dari HP + instalasi sampai rapi. Untuk rumah, kos, atau ruko kecil yang belum ada pengawasan.</p>
-        <p><b>Survei &amp; hitung gratis</b> — harga menyesuaikan titik dan merk kamera.</p>
+        <p>4 kamera CCTV Hilook + DVR + HDD 1TB + setting pantau dari HP + instalasi sampai rapi. Untuk rumah, kos, atau ruko kecil yang belum ada pengawasan.</p>
+        <p><b>Terima beres Rp4.900.000</b> — survei &amp; hitung titik gratis.</p>
         <a class="btn btn-wa" href="{wa2}" target="_blank" rel="noopener">Minta Survei Gratis</a>
       </div>
       <div class="keunggulan-item reveal d2">

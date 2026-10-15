@@ -122,6 +122,22 @@ layanan:
       - "Ganti atau tambah kamera"
       - "Setting penyimpanan rekaman (DVR atau cloud)"
       - "Perbaikan jaringan dan kabel"
+    # Harga PAKET terima beres (barang + jasa pasang + setting).
+    # Patokan modal dari price list distributor JMEDIA Juni 2026.
+    harga:
+      - nama: "PAKET 2 CCTV WIFI"
+        sub: "2 kamera Ezviz + memory + setting HP"
+        nominal: "3.200.000"
+      - nama: "PAKET 4 CCTV HILOOK"
+        sub: "4 kamera 2MP + DVR + HDD 1TB, terima beres"
+        nominal: "4.900.000"
+      - nama: "PAKET 4 CCTV DAHUA FULL COLOR"
+        sub: "4 kamera full color + DVR + HDD 1TB, terima beres"
+        nominal: "5.500.000"
+      - nama: "TAMBAH 1 TITIK KAMERA"
+        sub: "Tambah kamera di titik baru"
+        nominal: ""
+    catatan_harga: "Harga paket sudah termasuk barang, jasa pemasangan, dan setting sampai bisa dilihat dari HP. Survei dan hitung kebutuhan titik kamera tidak dikenakan biaya untuk wilayah Solo Raya. Merk dan jumlah kamera bisa menyesuaikan bujet."
     faq:
       - q: "Apakah bisa dilihat dari HP?"
         a: "Bisa. Setelah pemasangan, kami setting supaya Anda bisa memantau lewat HP dari mana saja."
