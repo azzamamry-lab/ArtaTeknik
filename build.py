@@ -1156,7 +1156,7 @@ def blok_paket():
     <div class="section-title">
       <span class="kicker">Paket Hemat</span>
       <h2>Satu Panggilan, Dua Urusan Beres</h2>
-      <p>Kompetitor jual jasa satuan. Kami bundel AC + CCTV supaya Mas hemat ongkos teknisi dan jadwal cukup sekali datang.</p>
+      <p>Kompetitor jual jasa satuan. Kami bundel AC + CCTV supaya Anda hemat ongkos teknisi dan jadwal cukup sekali datang.</p>
     </div>
     <div class="grid-keunggulan">
       <div class="keunggulan-item reveal">
@@ -1182,7 +1182,7 @@ def blok_paket():
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f4b400" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>
         </div>
         <h3>Paket Usaha Lancar</h3>
-        <p>Cuci AC berkala (per 3 bulan) + cek CCTV toko/kantor. Satu teknisi langganan yang hafal kondisi tempat usaha Mas. Prioritas jadwal.</p>
+        <p>Cuci AC berkala (per 3 bulan) + cek CCTV toko/kantor. Satu teknisi langganan yang hafal kondisi tempat usaha Anda. Prioritas jadwal.</p>
         <p><b>Harga langganan</b> — negosiasi per jumlah unit.</p>
         <a class="btn btn-wa" href="{wa3}" target="_blank" rel="noopener">Ajukan Langganan</a>
       </div>
@@ -1283,7 +1283,7 @@ def blok_harga(l):
 
     catatan = ""
     if l.get("catatan_harga"):
-        judul_catatan = ("Yang perlu Mas tahu sebelum pesan" if paket
+        judul_catatan = ("Yang perlu Anda tahu sebelum pesan" if paket
                          else "Harga di atas hanya biaya jasa, bukan termasuk material")
         catatan = f"""
     <div class="catatan-material">
