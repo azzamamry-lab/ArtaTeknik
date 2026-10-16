@@ -269,6 +269,19 @@ nav a.aktif{font-weight:700}
 .dua-kolom a{color:var(--blue);text-decoration:none;font-weight:600}
 .dua-kolom a:hover{text-decoration:underline}
 
+/* --- Kartu kelompok (masalah & pekerjaan) --- */
+.kelompok-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));
+  gap:18px;max-width:1060px;margin:0 auto;align-items:stretch}
+.kelompok-kartu{background:#fff;border:1.5px solid var(--sky-border);border-radius:18px;
+  padding:22px 20px;box-shadow:0 3px 14px rgba(11,42,78,.07)}
+.kelompok-kartu h3{font-size:16px;font-weight:800;color:var(--navy);margin:0 0 14px;
+  padding-bottom:12px;border-bottom:2px solid var(--gold);line-height:1.3}
+.kelompok-kartu ul{list-style:none;display:grid;gap:11px;padding:0;margin:0}
+.kelompok-kartu li{display:flex;gap:10px;align-items:flex-start;font-size:14px;
+  color:var(--text);line-height:1.55}
+.kelompok-kartu li::before{content:"";width:18px;height:18px;flex-shrink:0;margin-top:2px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5 9.5 18 20 6'/%3E%3C/svg%3E") no-repeat center/contain}
+
 /* --- FAQ --- */
 .faq-list{max-width:880px;margin:0 auto}
 .faq-item{background:#fff;border:1px solid var(--sky-border);border-radius:14px;
@@ -1420,6 +1433,21 @@ def blok_builder_cctv():
 </section>"""
 
 
+def blok_kelompok(daftar):
+    """Render daftar berkelompok sebagai kartu (judul + checklist isi)."""
+    kartu = ""
+    for g in daftar:
+        item = "".join(f"        <li>{esc(x)}</li>\n" for x in g["isi"])
+        kartu += f"""      <article class="kelompok-kartu">
+        <h3>{esc(g['judul'])}</h3>
+        <ul>
+{item}        </ul>
+      </article>
+"""
+    return f"""    <div class="kelompok-grid">
+{kartu}    </div>"""
+
+
 def blok_kartu_layanan():
     kartu = ""
     kelas_huruf = ["", "d1", "d2"]
@@ -1669,12 +1697,7 @@ def buat_layanan(l):
       <span class="kicker">Masalah Umum</span>
       <h2>Kalau Mengalami Ini, Hubungi Kami</h2>
     </div>
-    <div class="dua-kolom">
-      <ul>
-{''.join([f'        <li>{esc(x)}</li>' + chr(10) for x in l['masalah'][:3]])}      </ul>
-      <ul>
-{''.join([f'        <li>{esc(x)}</li>' + chr(10) for x in l['masalah'][3:]])}      </ul>
-    </div>
+{blok_kelompok(l.get('masalah_kelompok') or [{'judul': 'Daftar', 'isi': l['masalah']}])}
   </div>
 </section>
 
@@ -1684,12 +1707,7 @@ def buat_layanan(l):
       <span class="kicker">Yang Kami Kerjakan</span>
       <h2>Pekerjaan {esc(l['nama'])}</h2>
     </div>
-    <div class="dua-kolom">
-      <ul>
-{''.join([f'        <li>{esc(x)}</li>' + chr(10) for x in l['pekerjaan'][:3]])}      </ul>
-      <ul>
-{''.join([f'        <li>{esc(x)}</li>' + chr(10) for x in l['pekerjaan'][3:]])}      </ul>
-    </div>
+{blok_kelompok(l.get('pekerjaan_kelompok') or [{'judul': 'Daftar', 'isi': l['pekerjaan']}])}
     <div class="kotak-info" style="max-width:900px;margin-left:auto;margin-right:auto">
       <p><strong>Area layanan:</strong> Solo (Surakarta), Sukoharjo, dan Karanganyar. Untuk wilayah lain di sekitar Solo Raya, silakan tanya dulu.</p>
     </div>

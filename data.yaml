@@ -61,6 +61,21 @@ layanan:
       - "AC mau dipindah karena pindah rumah atau kos"
       - "Pemasangan lama kurang rapi atau bocor"
       - "Ingin menambah unit AC di ruangan baru"
+    masalah_kelompok:
+      - judul: "AC Bermasalah"
+        isi:
+          - "AC tidak dingin atau kurang dingin"
+          - "AC bocor atau meneteskan air"
+          - "AC berisik atau bergetar"
+          - "AC bau tidak sedap"
+          - "AC mati total atau sering mati sendiri"
+          - "AC lama tidak pernah dicuci"
+      - judul: "Pasang / Pindah AC"
+        isi:
+          - "AC baru belum dipasang"
+          - "AC mau dipindah karena pindah rumah atau kos"
+          - "Pemasangan lama kurang rapi atau bocor"
+          - "Ingin menambah unit AC di ruangan baru"
     pekerjaan:
       - "Cuci AC (indoor dan outdoor)"
       - "Isi freon (R32, R410, R22)"
@@ -74,6 +89,25 @@ layanan:
       - "Vakum sistem sesuai standar"
       - "Tes tekanan dan tes dingin"
       - "Konsultasi posisi indoor paling tepat"
+    pekerjaan_kelompok:
+      - judul: "Cuci & Perawatan"
+        isi:
+          - "Cuci AC (indoor dan outdoor)"
+          - "Isi freon (R32, R410, R22)"
+          - "Perbaikan kebocoran freon"
+      - judul: "Perbaikan"
+        isi:
+          - "Ganti kapasitor, thermistor, atau PCB"
+          - "Perbaikan kipas indoor dan outdoor"
+          - "Cek dan perbaikan kelistrikan"
+      - judul: "Pasang & Pindah"
+        isi:
+          - "Pasang AC baru (indoor dan outdoor)"
+          - "Bongkar pasang AC (pindahan)"
+          - "Pemasangan pipa, kabel, dan bracket"
+          - "Vakum sistem sesuai standar"
+          - "Tes tekanan dan tes dingin"
+          - "Konsultasi posisi indoor paling tepat"
     # Daftar harga (harga JASA saja — belum termasuk material tambahan)
     harga:
       - nama: "INSTALASI AC"
