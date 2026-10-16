@@ -765,11 +765,16 @@ def skrip():
   /* --- Builder paket custom CCTV --- */
   var bd = document.getElementById('builder');
   if(bd){
-    var HARGA = {kamera: 650000, dvr: 900000, hdd: 950000, pasang: 400000};
+    var HK = {2: 450000, 4: 650000, 6: 600000, 8: 550000};
+    var HM = {'Hilook 2MP': 0, 'Dahua Full Color': 250000, 'Ezviz WiFi': 350000};
+    var HD = {'4 channel': 900000, '8 channel': 1500000};
+    var HH = {'1TB': 950000, '2TB': 1650000};
+    var PASANG = 400000;
     var st = {kamera: 4, merk: 'Hilook 2MP', dvr: '4 channel', hdd: '1TB'};
     function rp(n){ return 'Rp' + n.toLocaleString('id-ID'); }
     function hitung(){
-      var total = st.kamera * HARGA.kamera + HARGA.dvr + HARGA.hdd + HARGA.pasang;
+      var total = st.kamera * (HK[st.kamera] + HM[st.merk]) +
+        HD[st.dvr] + HH[st.hdd] + PASANG;
       document.getElementById('builderTotal').textContent = rp(total);
       var teks = 'Assalamualaikum ARTA TEKNIK, saya mau paket custom: ' +
         st.kamera + ' kamera ' + st.merk + ', DVR ' + st.dvr +
