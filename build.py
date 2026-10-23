@@ -1448,6 +1448,51 @@ def blok_kelompok(daftar):
 {kartu}    </div>"""
 
 
+def blok_etalase_ac(daftar):
+    """Etalase AC baru terima beres: kartu per merk, 2 harga (1/2PK & 1PK),
+    tombol WA per merk."""
+    if not daftar:
+        return ""
+    kartu_html = ""
+    for a in daftar:
+        unggul = " paket-unggulan" if a.get("unggulan") else ""
+        badge = (f'<span class="paket-badge">{esc(a["badge"])}</span>'
+                 if a.get("badge") else "")
+        kartu_html += f"""      <article class="paket-kartu{unggul}">
+        {badge}
+        <h3>AC {esc(a['merk'])}</h3>
+        <p class="paket-sub">{esc(a['sub'])}</p>
+        <ul class="paket-isi">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>Unit baru + garansi resmi</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>Jasa pasang + vakum standar</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>Material standar (pipa 3m, kabel, breket)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6"/></svg>Garansi pengerjaan 7 hari</li>
+        </ul>
+        <div class="paket-harga">
+          <small>1/2 PK terima beres</small>
+          <b>Rp{a['harga_05']}</b>
+        </div>
+        <div class="paket-harga">
+          <small>1 PK terima beres</small>
+          <b>Rp{a['harga_1']}</b>
+        </div>
+        <a class="btn btn-wa paket-wa" href="{wa_pesan("Assalamualaikum ARTA TEKNIK, saya mau tanya AC " + a['merk'] + " baru.")}" target="_blank" rel="noopener">Tanya AC {esc(a['merk'])}</a>
+      </article>
+"""
+    return f"""<section class="section" id="etalase">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">Toko AC</span>
+      <h2>Jual AC Baru Terima Beres</h2>
+      <p>Harga sudah termasuk unit + jasa pasang + material standar. Tidak ada biaya dadakan.</p>
+    </div>
+    <div class="paket-grid">
+{kartu_html}    </div>
+    <p style="text-align:center;color:var(--muted);font-size:14px;margin-top:18px">Harga untuk 1/2 PK &amp; 1 PK standar. Kapasitas lain (3/4 PK, 1,5 PK, 2 PK) atau pipa lebih panjang dihitung terpisah — chat admin untuk hitungan pasti.</p>
+  </div>
+</section>"""
+
+
 def blok_kartu_layanan():
     kartu = ""
     kelas_huruf = ["", "d1", "d2"]
@@ -1715,6 +1760,8 @@ def buat_layanan(l):
 </section>
 
 {blok_harga(l)}
+
+{blok_etalase_ac(l.get('etalase_ac')) if l['slug'] == 'ac' else ''}
 
 {blok_builder_cctv() if l['slug'] == 'pasang-cctv' else ''}
 
